@@ -1,0 +1,20 @@
+.songslist-header-bottom{
+    width: 96%;
+    padding: 2rem 2%;
+}
+.songslist-header-bottom-nav{
+    width: 100%;
+    overflow: hidden;
+}
+.songslist-header-bottom-nav li{
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+.songslist-header-bottom-nav li img{
+    width: 2.2rem;
+    height: 2.2rem;
+}
+.songslist-header-bottom-nav span{
+    display: block;
+}

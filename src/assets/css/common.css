@@ -1,0 +1,13 @@
+html{
+    font-size: 10px;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+#app{
+    vertical-align: baseline;
+}

@@ -1,0 +1,65 @@
+/* 遮罩 */
+.mask{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.show-listmore{
+    width: 98%;
+    padding: 0 1%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 1; 
+}
+/* 右侧显示更多 */
+.list-more-top{
+    width: 100%;
+    position: relative;
+}
+.list-more-top-title{
+    width: 100%;
+    height: 4rem;
+}
+.list-more-top-title span{
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.tovip{
+    position: absolute;
+    color: red;
+    border: 0.1rem solid red;
+    border-radius: 1rem;
+    width: 6rem;
+    height: 2rem;
+    line-height: 2rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    text-align: center;
+}
+.songs-name{
+    font-size: 1.3rem;
+}
+.list-more-bottom{
+    width: 100%;
+    font-size: 1.4rem;
+}
+.list-more-bottom-ul{
+    width: 100%;
+}
+.list-more-bottom-ul li{
+    width: 100%;
+    padding: 1rem 0;
+    line-height: 2.5rem;
+    border-bottom: 0.1rem solid #eee;
+}
+.list-more-bottom-ul li img{
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+}
