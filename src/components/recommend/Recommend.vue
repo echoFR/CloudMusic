@@ -1,25 +1,27 @@
 <template>
-    <div id="recommend">
+    <div class="recommend">
       <!-- 轮播图 -->
         <Slide></Slide>
       <!-- 导航栏选项 -->
         <Tag></Tag>  
       <!-- 推荐歌单 -->
-        <RecoSongs></RecoSongs>
     </div>
 </template>
 <script>
-// Slide 轮播图
-import Slide from '@/components/recommend/slide/Slide'
-import Tag from '@/components/recommend/tag/Tag'
-import RecoSongs from './recosongs/Recosongs'
+// // Slide 轮播图
+import Slide from '@/base/slide/Slide'
+import Tag from '@/components/recommend/recommend-tag/Tag'
+import Content from '@/components/recommend/recommend-content/Content'
 export default {
   components: {
     Slide,
     Tag,
-    RecoSongs
+    Content
   }
 }
 </script>
+<style>
+</style>
+
 
 

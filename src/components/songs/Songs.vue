@@ -1,18 +1,18 @@
 <template>
   <div class="songs">
       <!-- 歌单头部 -->
-      <Sheader></Sheader>
+      <songsHeader></songsHeader>
       <!-- 歌单列表 -->
-      <Songslist></Songslist>
+      <songsData></songsData>
   </div>
 </template>
 <script>
-import Sheader from '@/components/songs/sheader/Sheader'
-import Songslist from '@/components/songs/list/List'
+import songsHeader from '@/components/songs/songs-header/Sheader'
+import songsData from '@/components/songs/songs-data/SData'
 export default {
   components:{
-      Sheader,
-      Songslist,
+      songsHeader,
+      songsData,
   }
 }
 </script>

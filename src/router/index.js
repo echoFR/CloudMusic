@@ -3,18 +3,16 @@ import Router from 'vue-router'
 import Recommend from '@/components/recommend/Recommend'
 import Songs from '@/components/songs/Songs'
 import Rank from '@/components/rank/Rank'
-import Songslist from '@/components/songslist/Songslist'
+import Search from '@/components/search/Search'
+import List from '@/components/list/List'
 import Player from '@/components/player/Player'
 import Info from '@/components/info/Info'
-import Search from '@/components/search/Search'
-import SType from '@/components/search/stype/SType'
-import ListSearch from '@/components/songslist/listsearch/ListSearch'
 Vue.use(Router)
 export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/recommend'
+      redirect: '/recommend',
     },
     {
       path: '/recommend',
@@ -27,57 +25,31 @@ export default new Router({
       component: Songs
     },
     {
+      path: '/songslist/:id',
+      component: List,
+      name:'songslist',
+    },
+    {
       path: '/rank',
       name: 'rank',
       component: Rank
     },
     {
-      path: '/songslist/:id',
-      component: Songslist,
-      name:'songslist'
-    },
-    {
       path: '/player/:id',
       component: Player,
-      name: 'player'
+      name: 'player',
+    },
+    {
+      path: '/search',
+      component: Search,
+      name: 'search',
     },
     {
       path: '/info',
       component: Info,
       name: 'info'
     },
-    {
-      path: '/search',
-      component: Search,
-      name: 'search',
-      children:[
-        {
-          path:'song',
-          component:SType,
-        },
-        {
-          path: 'singer',
-          component:SType,          
-        },
-        {
-          path: 'songslist',
-          component:SType,          
-        },
-        {
-          path: 'album',
-          component:SType,          
-        },
-        {
-          path: 'user',
-          component:SType,          
-        },
-      ]
-    },
-    {
-      path: '/listsearch', //歌单内查找歌曲
-      component: ListSearch,
-      name: 'listsearch'
-    }
   ],
   mode:'history',
+  // scrollBehavior: () => ({ y: 0 }), // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
 })

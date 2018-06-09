@@ -1,0 +1,54 @@
+.go-back{
+    width: 100%;
+    position: relative;
+    font-size: 1.7rem;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+.go-back img{
+    width: 2.6rem;
+    height: 2.6rem;
+}
+.go-back-left{
+    display: inline-block;
+    margin-left: 1rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 0;
+}
+.go-back-title{
+    margin-left: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    display: inline-block;
+}
+.go-back-right{
+    position: absolute;
+    right: 0;
+    top: 1.5rem;
+}
+.go-back-right img{
+    margin-right: 1.5rem;
+}
+/* select more */
+.select-more{
+    font-size: 1.5rem;
+    color: black;
+    position: absolute;
+    background-color: white;
+    top: 0.2rem;
+    right: 0;
+    width: 45%;
+    z-index: 100;
+}
+.select-more ul{
+    width: 100%;   
+}
+.select-more ul li{
+    width: 100%;
+    border-bottom: 0.1rem #eee solid;
+    padding: 0.4rem 0;
+    text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+}
