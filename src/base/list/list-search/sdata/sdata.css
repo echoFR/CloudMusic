@@ -1,0 +1,31 @@
+.s-data,.s-data-ul{
+    width: 100%;
+}
+.s-data-ul{
+    margin-top: 1rem;
+}
+.s-data-ul li{
+    border-bottom: 0.05rem solid #eee;
+    padding: 0.4rem 0;
+    position: relative; 
+}
+.s-name,.s-singer{
+    margin-left: 6rem;
+    display: block;
+    margin-bottom: 0.6rem;
+}
+.s-key{
+    display: block;
+    font-size: 1.8rem;
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    color: #728B87;
+    padding: 0 1rem;
+}
+.s-name{
+    font-size: 1.6rem;
+}
+.s-singer{
+    font-size: 1.2rem;
+}

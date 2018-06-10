@@ -21,6 +21,9 @@ export default {
 }
 </script>
 <style>
+.recommend{
+  margin-top: 9rem;
+}
 </style>
 
 

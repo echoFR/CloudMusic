@@ -24,11 +24,11 @@ export default {
     // 路由   设置头部
     $route(to,from){
       if(to.name=='recommend' || to.name=='songs' || to.name=='rank'){
-        this.$refs.appbox.style.paddingTop=9+'rem';
+        // this.$refs.appbox.style.paddingTop=9+'rem';
         this.$store.commit('showHeader');
       }else{
         this.$store.commit('hideHeader');
-        this.$refs.appbox.style.paddingTop=0;        
+        // this.$refs.appbox.style.paddingTop=0;        
       }
     },
   },
@@ -43,6 +43,5 @@ export default {
 <style>
 .app{
     vertical-align: baseline;
-    padding-top: 9rem;
 }
 </style>

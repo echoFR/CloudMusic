@@ -17,5 +17,8 @@ export default {
 }
 </script>
 <style>
+.songs{
+  margin-top: 9rem;
+}
 </style>
 

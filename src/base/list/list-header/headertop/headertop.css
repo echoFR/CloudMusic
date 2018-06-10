@@ -1,0 +1,47 @@
+.songslist-header-top{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+.songslist-header-left{
+    float: left;
+    position: relative;
+    margin: 0 1rem 0 1rem;
+}
+.songslist-hear{
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+}
+.songslist-header-left span img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.songslist-header-left img{
+    width: 11rem;
+    height: 11rem;
+}
+.songslist-more{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+/* 右侧标题 */
+.songslist-header-ringht{
+    float: left;
+    width: 50%;
+}
+.right-title{
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+.right-text{
+    width: 100%;
+    margin-left: 1rem;
+}
+.right-auto img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    margin-right: 0.5rem;
+}
