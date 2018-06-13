@@ -75,9 +75,7 @@ export default{
     background-size: 100% 100%;
     background-repeat: no-repeat;
     font-size: 1.6rem;
-    /* color: #eee;
-     */
-     color: black;
+    color: #eee;
     padding-top: 6.4rem;
 }
 .player-mask{

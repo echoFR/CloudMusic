@@ -33,6 +33,8 @@ export default{
         // 跳到播放器 并且播放
         toPlayer(song,index){            
             // 当前歌曲数组
+            localStorage.setItem('songlist',JSON.stringify(this.songsdata.tracks));
+            localStorage.setItem('songindex',index);
             this.setSonglist(this.songsdata.tracks);
             // 序号
             this.setplayerIndex(index);

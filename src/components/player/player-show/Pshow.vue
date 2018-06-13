@@ -2,7 +2,7 @@
 <div class="pshow">
     <ShowMore v-show="isShowMore"></ShowMore>
     <div class="pshow-top" @click="swapShow()">
-        <transition enter-active-class="animated fadeInRight" leave-active-class="animated fadeOutRight">
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="pshow-top-song" v-show="showImg">
                 <div class="pshow-top-songimg" :style='{"animation": (playerStatus?" 25s linear 0s normal none infinite rotate":"none")}'>
                     <img :src="playSong.picUrl">
@@ -26,7 +26,7 @@
             </div>
         </transition>
         <!-- 歌词 -->
-        <transition enter-active-class="animated fadeInRight" leave-active-class="animated fadeOutRight">
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="pshow-top-songword" v-show="!showImg">
             歌词
             </div>
@@ -61,7 +61,7 @@ export default{
             'setplayerUrl'
         ]),
         swapShow(){
-            console.log('swap');  
+            this.showImg=!this.showImg;  
         },
         getstopBubble(){
             stopBubble();
@@ -75,5 +75,6 @@ export default{
 
 <style>
 @import './player-show.css';
+.animated {animation-duration: 0.2s;}
 </style>
 
