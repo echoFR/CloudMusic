@@ -11,7 +11,6 @@
 <script>
 import Header from '@/components/header/Header'
 import MyAudio from '@/components/audio/Audio'
-
 import {mapActions,mapGetters} from 'vuex'
 
 export default {

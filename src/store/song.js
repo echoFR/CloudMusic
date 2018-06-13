@@ -2,6 +2,7 @@ import axios from 'axios'
 let state={
     // 点击右侧显示更多
     isShowMore: false,
+    isShowList: false,
     song:{//显示更多歌曲信息
         id:0,
         name:'',
@@ -13,7 +14,6 @@ let state={
         comments: [], //   最新20条
         hotComments: []//热评
     },
-
     //播放歌曲的歌单列表
     songList:[],
     // 播放的歌单
@@ -21,14 +21,17 @@ let state={
     // 播放的序号
     playerIndex: -1,
     // 播放状态  暂停/播放
-    playerUrl:'',
     playerStatus: true,
     // 播放顺序 1 顺序 2单曲 3随机  
-    playOrder: 1
+    playorder: 1,
+    playerUrl:''
 }
 const getters={
     isShowMore:(state)=>{
         return state.isShowMore;
+    },
+    isShowList:(state)=>{
+        return state.isShowList;
     },
     song:(state)=>{
         return state.song;
@@ -48,8 +51,8 @@ const getters={
     playerStatus:(state)=>{
         return state.playerStatus;
     },
-    playOrder:(state)=>{
-        return state.playOrder;
+    playorder:(state)=>{
+        return state.playorder;
     },
 }
 const mutations={
@@ -60,6 +63,14 @@ const mutations={
     },
     hideMore(state){
         state.isShowMore=false; 
+        document.body.style.overflow='auto'; 
+    },
+    showList(state){
+        state.isShowList=true;
+        document.body.style.overflow='hidden';  
+    },
+    hideList(state){
+        state.isShowList=false;
         document.body.style.overflow='auto'; 
     },
     // 歌曲
@@ -80,7 +91,6 @@ const mutations={
         state.song.comments=obj.comments,
         state.song.hotComments=obj.hotComments
     },
-
     // 播放相关
     // 获取的播放列表
     setSonglist(state,songList){
@@ -89,9 +99,20 @@ const mutations={
     setplayerIndex(state,index){
         state.playerIndex=index;
     },
+    // 播放的歌单顺序
+    setPlayerList(state,list){
+        state.playerList=list;
+    },
+    setPlayerStatus(state){
+        state.playerStatus=!state.playerStatus;
+    },
+    setPlayorder(state,i){
+        state.playorder=i;
+    },
     setplayerUrl(state,url){
         state.playerUrl=url;
     },
+
 }
 const actions={
     getSongComment:({commit,state},songid)=>{

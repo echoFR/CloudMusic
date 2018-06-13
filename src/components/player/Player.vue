@@ -63,7 +63,7 @@ export default{
         this.filterSong(this.playSong);
         this.getSongComment(this.playSong.id);
         // 歌曲url
-        this.getSongUrl(this.playSong.id);
+        // this.getSongUrl(this.playSong.id);
     }
 }
 </script>
