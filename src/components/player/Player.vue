@@ -2,10 +2,10 @@
   <div class="player">
       <PHeader :playSong='song'></PHeader>
       <PShow :playSong='song'></PShow>
+      
       <div class="player-mask"></div>
       <div class="player-maskbg" :style='{backgroundImage: "url(" + song.picUrl + ")"}'></div>
       <div class="player-maskbg2"></div>
-
   </div>
 </template>
 <script>
@@ -29,22 +29,41 @@ export default{
             'song',
             'songList',
             'playerIndex',
-        ])
+        ]),
+        upsongList(){
+            //刷新后 歌单没有数据
+            if(this.songList.length==0){
+                let songlist=JSON.parse(localStorage.getItem('songlist'));
+                this.setSonglist(songlist);
+            }
+            return this.songList;
+        },
+        upplayerIndex(){
+            if(this.playerIndex==-1){
+                this.setplayerIndex(localStorage.getItem('songindex'));
+            }
+            return this.playerIndex;
+        }     
     },
     methods:{
         ...mapMutations([
             'filterSong',
-            'setplayerUrl'
+            'setplayerUrl',
+            'setSonglist',
+            'setplayerIndex'
+        ]),
+        ...mapActions([
+            'getSongComment',
+            'getSongUrl'
         ])
     },
-    mounted(){        
+    mounted(){ 
         //  当前播放列表 和歌曲序号
-        this.playSong=this.songList[this.playerIndex] 
+        this.playSong=this.upsongList[this.upplayerIndex] 
         this.filterSong(this.playSong);
-        this.$store.dispatch('getSongComment',this.playSong.id); 
-        // 获取歌曲url
-        this.$store.dispatch('getSongUrl',this.playSong.id);
-        // 获取歌词
+        this.getSongComment(this.playSong.id);
+        // 歌曲url
+        this.getSongUrl(this.playSong.id);
     }
 }
 </script>
@@ -56,7 +75,9 @@ export default{
     background-size: 100% 100%;
     background-repeat: no-repeat;
     font-size: 1.6rem;
-    color: #eee;
+    /* color: #eee;
+     */
+     color: black;
     padding-top: 6.4rem;
 }
 .player-mask{

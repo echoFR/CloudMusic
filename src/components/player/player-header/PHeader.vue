@@ -59,6 +59,7 @@ export default{
     top: 2.3rem;
     left: 0;
     margin-left: 4.2rem;
+    color: #fff;
 }
 .pheader-goback,.pheader-share{
     position: absolute;

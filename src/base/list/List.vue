@@ -8,10 +8,10 @@
 </template>
 <script>
 import {HOST} from '@/assets/js/config.js'
-import LHeader from '@/components/list/list-header/ListHeader'
-import LTag from '@/components/list/list-tag/LTag'
-import ListData from '@/components/list/list-data/ListData'
-import ShowMore from '@/components/list/list-showmore/ShowMore'
+import LHeader from '@/base/list/list-header/ListHeader'
+import LTag from '@/base/list/list-tag/LTag'
+import ListData from '@/base/list/list-data/ListData'
+import ShowMore from '@/base/list/list-showmore/ShowMore'
 import axios from 'axios'
 import {mapGetters,mapActions} from 'vuex'
 export default{

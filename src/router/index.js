@@ -4,7 +4,7 @@ import Recommend from '@/components/recommend/Recommend'
 import Songs from '@/components/songs/Songs'
 import Rank from '@/components/rank/Rank'
 import Search from '@/components/search/Search'
-import List from '@/components/list/List'
+import List from '@/base/list/List'
 import Player from '@/components/player/Player'
 import Info from '@/components/info/Info'
 Vue.use(Router)

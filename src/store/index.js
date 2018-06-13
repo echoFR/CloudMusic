@@ -2,12 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex);
 
-import mutations from './mutations'
-import actions from './actions'
-
+import loading from './loading'
+import header from './header'
+import song from './song'
 export default new Vuex.Store({
-    actions,
     modules:{
-        mutations
+        loading,
+        song,
+        header,
     }
 }) 

@@ -5,8 +5,8 @@
 </div>
 </template>
 <script>
-    import Sinput from '@/components/list/list-search/sinput/Sinput.vue'
-    import Sdata from '@/components/list/list-search/sdata/Sdata.vue'    
+    import Sinput from '@/base/list/list-search/sinput/Sinput.vue'
+    import Sdata from '@/base/list/list-search/sdata/Sdata.vue'    
     export default{
         components:{
             Sinput,

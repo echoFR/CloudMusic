@@ -56,9 +56,5 @@ export default{
 <style>
 @import './list.css';
 .animated {animation-duration: 0.3s;}
-.a{
-    position: fixed;
-    top: 0;
-}
 </style>
 

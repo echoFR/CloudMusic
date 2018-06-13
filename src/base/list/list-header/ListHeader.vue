@@ -6,9 +6,9 @@
     </div>
 </template>
 <script>
-import GoBack from '@/components/list/list-header/goback/GoBack'
-import HeaderTop from '@/components/list/list-header/headertop/HeaderTop'
-import HeaderBottom from '@/components/list/list-header/headerbottom/HeaderBottom'
+import GoBack from '@/base/list/list-header/goback/GoBack'
+import HeaderTop from '@/base/list/list-header/headertop/HeaderTop'
+import HeaderBottom from '@/base/list/list-header/headerbottom/HeaderBottom'
     export default{
         components:{
             GoBack,

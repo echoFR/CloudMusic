@@ -1,5 +1,5 @@
 <template>
   <div class="hot-search">
-      搜索
+    search
   </div>
 </template>
