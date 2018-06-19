@@ -3,3 +3,9 @@
     search
   </div>
 </template>
+<style>
+.hot-search{
+  background-color: #EFEFEF;  
+}
+</style>
+

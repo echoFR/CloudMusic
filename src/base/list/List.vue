@@ -99,6 +99,9 @@ export default{
 }
 </script>
 <style>
+.songslist{
+    background-color: #EFEFEF;    
+}
 </style>
 
 

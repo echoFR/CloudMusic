@@ -42,5 +42,6 @@
 <style>
 .rank{
   margin-top: 9rem;
+  background-color: #EFEFEF;  
 }
 </style>

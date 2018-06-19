@@ -1,7 +1,7 @@
 <template>
 <div class="pshow">
     <ShowMore v-show="isShowMore"></ShowMore>
-    <ShowList v-show="isShowList"></ShowList>
+    <ShowList v-show="isShowList" :songlist='songList'></ShowList>
     <div class="pshow-top" @click="swapShow()">
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="pshow-top-song" v-show="showImg">
@@ -10,17 +10,17 @@
                     <div class="pshow-top-border"></div>
                 </div>
                 <div class="pshow-top-songtag">
-                    <span @click="getstopBubble()">
+                    <span @click.stop="stop()">
                         <img src="@/assets/img/shouc2.png">
                     </span>
-                    <span @click="getstopBubble()">
+                    <span @click.stop="stop()">
                         <img src="@/assets/img/down.png">                
                     </span>
-                    <span @click="getstopBubble()">
+                    <span @click.stop="stop()">
                         <img src="@/assets/img/comment.png">
                         <span class="commentCount">{{ playSong.commentCount }}</span>
                     </span>
-                    <span @click="getstopBubble(),more()">
+                    <span @click.stop="more()">
                         <img src="@/assets/img/more.png">
                     </span>            
                 </div>
@@ -65,7 +65,7 @@
                 </div>
                 <!-- 播放/暂停 -->
                 <div class="playing" @click="Playing()">
-                    <img src="@/assets/img/playing.png">
+                    <img :src="this.playerStatus?stopBtn:playingBtn" ref="playBtn">
                 </div>
                 <!-- 下一首 -->
                 <div class="downsong" @click="downSong()">
@@ -83,8 +83,7 @@
 <script>
 import ShowMore from '@/base/list/list-showmore/ShowMore'
 import ShowList from '@/base/showlist/ShowList'
-import {mapMutations,mapGetters} from 'vuex'
-import stopBubble from '@/assets/js/stopBubble'
+import {mapMutations,mapGetters,mapActions} from 'vuex'
 import axios from 'axios'
 export default{
     props:['playSong'],
@@ -95,6 +94,8 @@ export default{
     data(){
         return{
             showImg: true,
+            stopBtn: require('@/assets/img/stop.png'),
+            playingBtn: require('@/assets/img/playing.png')
         }
     },
     computed:{
@@ -106,19 +107,26 @@ export default{
             'playerIndex',//播放的序号
             'playerStatus',//播放/暂停
             'playorder',// 播放顺序 1 顺序 2单曲 3随机
-        ])
+            'playerUrl',//歌曲url
+        ]),
     },
     methods:{
         ...mapMutations([
             'showMore',
             'showList',
-            'setplayerUrl'
+            'setplayerUrl',
+            'setplayerIndex',
+            'setSonglist',
+            'setPlayerStatus',
+        ]),
+        ...mapActions([
+            'getSongUrl'
         ]),
         swapShow(){
             this.showImg=!this.showImg;  
         },
-        getstopBubble(){
-            stopBubble();
+        stop(){
+            console.log('操作');
         },
         more(){            
             this.showMore();          
@@ -131,14 +139,24 @@ export default{
         upSong(){
             console.log('up');    
         },
-        // 播放暂停
-        Playing(){
-            console.log('play');    
-        }, 
         // 下一首
         downSong(){
+            console.log(this.playerIndex);
+            this.setplayerIndex(parseInt(this.playerIndex)+1);
+            console.log(this.playerIndex);           
             console.log('down');  
         },
+        // 播放暂停
+        Playing(){
+            this.setPlayerStatus();
+            if(this.playerStatus == true){                    
+                this.$refs.playBtn.src= this.stopBtn;                
+            }
+            else{              
+                this.$refs.playBtn.src= this.playingBtn;
+            }           
+             
+        }, 
         // 显示歌单
         toshowList(){
             this.showList();                        

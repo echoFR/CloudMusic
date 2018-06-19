@@ -24,7 +24,7 @@ let state={
     playerStatus: true,
     // 播放顺序 1 顺序 2单曲 3随机  
     playorder: 1,
-    playerUrl:''
+    playerUrl: null
 }
 const getters={
     isShowMore:(state)=>{
@@ -110,6 +110,7 @@ const mutations={
         state.playorder=i;
     },
     setplayerUrl(state,url){
+        localStorage.setItem('songurl',url);
         state.playerUrl=url;
     },
 

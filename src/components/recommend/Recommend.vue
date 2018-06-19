@@ -23,6 +23,7 @@ export default {
 <style>
 .recommend{
   margin-top: 9rem;
+  background-color: #EFEFEF;  
 }
 </style>
 

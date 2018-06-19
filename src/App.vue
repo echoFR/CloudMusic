@@ -11,23 +11,36 @@
 <script>
 import Header from '@/components/header/Header'
 import MyAudio from '@/components/audio/Audio'
-import {mapActions,mapGetters} from 'vuex'
-
+import {mapActions,mapGetters, mapMutations} from 'vuex'
 export default {
   name: 'App',
   components:{
     Header,
-    MyAudio
+    MyAudio,
   },
   watch:{
     // 路由   设置头部
     $route(to,from){
       if(to.name=='recommend' || to.name=='songs' || to.name=='rank'){
-        this.$store.commit('showHeader');
+        this.showHeader();
       }else{
-        this.$store.commit('hideHeader');        
+        this.hideHeader();
       }
+      if(to.name=='player'){
+        this.hideMiniPlay();
+      }
+      else{
+        this.showMiniPlay();
+      }  
     },
+  },
+  methods:{
+    ...mapMutations([
+      'showHeader',
+      'hideHeader',
+      'hideMiniPlay',
+      'showMiniPlay'
+    ]),
   },
   computed:{
     ...mapGetters([
@@ -41,12 +54,18 @@ export default {
     else{
         this.$store.commit('hideHeader');              
     }
+    if(this.$route.name=='player'){
+      this.hideMiniPlay();
+    }
+    else{
+      this.showMiniPlay();
+    } 
   }
 }
 </script>
-
 <style>
 .app{
     vertical-align: baseline;
+    background-color: #EFEFEF;
 }
 </style>

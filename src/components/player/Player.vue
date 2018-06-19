@@ -1,8 +1,7 @@
 <template>
   <div class="player">
       <PHeader :playSong='song'></PHeader>
-      <PShow :playSong='song'></PShow>
-      
+      <PShow :playSong='song'></PShow> 
       <div class="player-mask"></div>
       <div class="player-maskbg" :style='{backgroundImage: "url(" + song.picUrl + ")"}'></div>
       <div class="player-maskbg2"></div>
@@ -63,7 +62,8 @@ export default{
         this.filterSong(this.playSong);
         this.getSongComment(this.playSong.id);
         // 歌曲url
-        // this.getSongUrl(this.playSong.id);
+        // console.log(this.playerIndex);
+        this.getSongUrl(this.upsongList[this.upplayerIndex].id);
     }
 }
 </script>

@@ -38,7 +38,7 @@ export default{
             this.setSonglist(this.songsdata.tracks);
             // 序号
             this.setplayerIndex(index);
-            this.$router.push({path:'/player/'+song.id})
+            this.$router.push({path:'/player/'+song.id});
         },
         // 点击右侧获取更多
         More(song){

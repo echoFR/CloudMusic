@@ -22,7 +22,7 @@ import {mapActions,mapGetters} from 'vuex'
 /* 加载更多 */
 .loading{
     width: 100%;
-    background-color: white;
+    background-color: #EFEFEF;
     text-align: center;
     font-size: 1.5rem;
     margin-top: 3rem;
