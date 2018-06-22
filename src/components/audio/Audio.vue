@@ -85,11 +85,11 @@ export default{
     ]),
     // mini Player 播放暂停
     Playing(){ 
-        this.setPlayerStatus();
         if(this.playerStatus==true){
-          this.$refs.miniplay.src=this.stopBtn;
+          this.setPlayerStatus(false);
+          this.getSongUrl(this.upsongList[this.upplayerIndex].id);                
         }else{
-          this.$refs.miniplay.src=this.playingBtn;          
+          this.setPlayerStatus(true);
         }
     },
     // 跳到player
@@ -111,17 +111,6 @@ export default{
           }
       });    
     }
-  },
-  mounted(){
-    this.$nextTick(()=>{
-        if(this.playerStatus == true){//暂停
-          this.getSongUrl(this.nowSong.id);
-          this.$refs.audio.pause();   
-        }
-        else{   
-          this.$refs.audio.play();        
-        }
-    });
   }
 }
 </script>

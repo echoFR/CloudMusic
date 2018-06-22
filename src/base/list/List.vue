@@ -100,7 +100,8 @@ export default{
 </script>
 <style>
 .songslist{
-    background-color: #EFEFEF;    
+    background-color: #EFEFEF;   
+    margin-bottom: 5rem; 
 }
 </style>
 

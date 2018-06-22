@@ -21,7 +21,7 @@ let state={
     // 播放的序号
     playerIndex: -1,
     // 播放状态  暂停/播放
-    playerStatus: true,
+    playerStatus: false,
     // 播放顺序 1 顺序 2单曲 3随机  
     playorder: 1,
     playerUrl: null
@@ -103,8 +103,8 @@ const mutations={
     setPlayerList(state,list){
         state.playerList=list;
     },
-    setPlayerStatus(state){
-        state.playerStatus=!state.playerStatus;
+    setPlayerStatus(state,status){
+        state.playerStatus=status;
     },
     setPlayorder(state,i){
         state.playorder=i;
