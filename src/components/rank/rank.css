@@ -1,0 +1,86 @@
+.rank-offcial{
+    width: 100%;
+    overflow: hidden;
+}
+.rank-offcial-title,.rank-global-title{
+    display: block;
+    color: black;
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.rank-offcial-box{
+    width: 100%;
+}
+.rank-offcial-speedup{
+    width: 100%;
+    padding: 0.4rem 0;
+    margin-left: 1rem;
+    overflow: hidden;
+    border-bottom: 0.1rem solid #d9d9d9;
+}
+.speedup-left,.speedup-right{
+    float: left;
+}
+.speedup-left{
+    position: relative;
+}
+.speedup-left-updatetime{
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    color: white;
+    font-size: 1.1rem;
+}
+.speedup-left,.speedup-left img{
+    width: 12rem;
+    height: 12rem;
+}
+.speedup-right{
+    margin-left: 1rem;
+}
+.speedup-right-ul{
+    width: 100%;
+}
+.speedup-right-ul li{
+    width: 100%;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.3rem;
+}
+.rank-global,.rank-global-box{
+    width: 100%;
+}
+.global-row{
+    width: 98%;
+    overflow: hidden;
+    padding-left: 2%; 
+}
+.electro{
+    width: 32%;
+    float: left;
+    margin-right: 1%;
+    margin-bottom: 1rem;
+}
+.electro-img{
+    width: 100%;
+    position: relative;
+}
+.electro img{
+    width: 100%;
+    height: auto;
+}
+.electro-title{
+    overflow: hidden;
+    width: 100%;
+    display: block;
+    padding: 0.2rem 0 0.2rem 0.5rem;
+    font-size: 1.2rem;
+}
+.hotnum{
+    width: 2.5rem;
+    height: 2.5rem;
+    position: relative;
+    top: 0.5rem;
+    left: 0.5rem;
+}

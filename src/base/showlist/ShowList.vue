@@ -64,9 +64,6 @@ export default{
             this.hide();
             this.getSongUrl(this.songList[this.playerIndex].id);                     
             this.$router.replace({path: '/player/' + this.songList[this.playerIndex].id});
-            // console.log(this.playerStatus);
-            // this.setPlayerStatus(true);
-                                  
         }
     },
     computed:{

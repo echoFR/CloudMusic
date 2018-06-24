@@ -24,7 +24,11 @@ let state={
     playerStatus: false,
     // 播放顺序 1 顺序 2单曲 3随机  
     playorder: 1,
-    playerUrl: null
+    playerUrl: null,
+    playerWord: '',//歌词
+    songReady: false,//歌曲ready
+    duration: 0,//时长
+    currentTime: 0,//当前时长
 }
 const getters={
     isShowMore:(state)=>{
@@ -54,6 +58,18 @@ const getters={
     playorder:(state)=>{
         return state.playorder;
     },
+    playerWord:(state)=>{
+        return state.playerWord;
+    },
+    songReady:(state)=>{
+        return state.songReady;
+    },
+    duration:(state)=>{
+        return state.duration;
+    },
+    currentTime:(state)=>{
+        return state.currentTime;
+    }
 }
 const mutations={
     // 显示更多
@@ -110,10 +126,20 @@ const mutations={
         state.playorder=i;
     },
     setplayerUrl(state,url){
-        localStorage.setItem('songurl',url);
         state.playerUrl=url;
     },
-
+    setPlayerWord(state,word){
+        state.playerWord=word;
+    },
+    setSongReady(state,status){
+        state.songReady=status;
+    },
+    setDuration(state,time){
+        state.duration=time;
+    },
+    setCurrentTime(state,time){
+        state.currentTime=time;
+    }
 }
 const actions={
     getSongComment:({commit,state},songid)=>{
@@ -134,11 +160,19 @@ const actions={
     getSongUrl:({commit,state},songid)=>{
         axios.get('http://localhost:3000/music/url?id='+songid).then((res)=>{
                 // 设置playerUrl
-                commit('setplayerUrl',res.data.data[0].url)       
+                commit('setplayerUrl',res.data.data[0].url);
             }).catch((err)=>{
                 console.log(err);
                 console.log('请求失败');
         }); 
+    },
+    getPlayerWord:({commit,state},songid)=>{
+        axios.get('http://localhost:3000/lyric?id='+songid).then((res)=>{
+            commit('setPlayerWord',res.data.lrc.lyric);
+        }).catch((err)=>{
+            console.log(err);
+            console.log('获取歌词失败');
+        });   
     }
 }
 export default{

@@ -1,6 +1,8 @@
 <template>
   <div class="audio">
-      <audio :src="playerUrl" ref="audio" autoplay loop></audio>
+    <!-- autoplay loop -->
+      <audio :src="playerUrl" ref="audio" @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay loop></audio>
+
       <!-- mini Player -->
       <div class="mini" v-show="miniPlay" @click="toPlayer()">
         <div class="mini-left">
@@ -44,7 +46,8 @@ export default{
       'playorder',// 播放顺序 1 顺序 2单曲 3随机
       'playerUrl',//歌曲url
       'miniPlay',
-      'isShowList'
+      'isShowList',
+      'songReady'
     ]),
     upsongList(){
         //刷新后 歌单没有数据
@@ -71,26 +74,31 @@ export default{
             nowSong.singer+=' / '+song.ar[1].name
         }
       return nowSong;
-    }
+    },
   },
   methods:{
     ...mapMutations([
       'setSonglist',
       'setplayerIndex',
       'setPlayerStatus',
-      'showList'
+      'showList',
+      'setSongReady',
+      'setDuration',
+      'setCurrentTime'
     ]),
     ...mapActions([
       'getSongUrl'
     ]),
     // mini Player 播放暂停
-    Playing(){ 
+    Playing(){
+      this.$nextTick(()=>{
         if(this.playerStatus==true){
           this.setPlayerStatus(false);
-          this.getSongUrl(this.upsongList[this.upplayerIndex].id);                
         }else{
           this.setPlayerStatus(true);
+          this.getSongUrl(this.upsongList[this.upplayerIndex].id);                          
         }
+      });
     },
     // 跳到player
     toPlayer(song,index){  
@@ -98,7 +106,28 @@ export default{
     },
     Morelist(){
       this.showList();                        
-    }
+    },
+    startPlay(){
+      this.setSongReady(true);
+    },
+    error(){
+      this.setSongReady(true);      
+    },
+    timeUpdate(){
+      // console.log(this.format(this.$refs.audio.currentTime));
+      this.setCurrentTime(this.format(this.$refs.audio.currentTime));
+      // console.log(this.$refs.audio.duration);
+      console.log(this.format(this.$refs.audio.duration));
+    },
+    format (interval) {
+        interval = interval | 0
+        let minute = interval / 60 | 0
+        let second = interval % 60
+        if (second < 10) {
+            second = '0' + second
+        }
+        return minute + ':' + second
+    },
   },
   watch:{
     playerStatus(newV,oldV){
@@ -110,8 +139,11 @@ export default{
             this.$refs.audio.play();        
           }
       });    
+    },
+    playerUrl(newV,oldV){
+      // console.log(this.format(this.$refs.audio.duration));
     }
-  }
+  },
 }
 </script>
 <style>

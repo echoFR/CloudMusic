@@ -1,6 +1,7 @@
 <template>
   <div class="songslist">
-      <LHeader :songsdata="songs"></LHeader>
+      <LHeader :songsdata="songs" v-show="isSongList"></LHeader>
+      <RHeader :songsdata="songs" v-show="!isSongList"></RHeader>
       <LTag :songsdata="songs"></LTag>
       <ListData :songsdata="songs"></ListData>
       <ShowMore v-show="isShowMore"></ShowMore>
@@ -9,6 +10,7 @@
 <script>
 import {HOST} from '@/assets/js/config.js'
 import LHeader from '@/base/list/list-header/ListHeader'
+import RHeader from '@/base/list/list-header/RankHeader'
 import LTag from '@/base/list/list-tag/LTag'
 import ListData from '@/base/list/list-data/ListData'
 import ShowMore from '@/base/list/list-showmore/ShowMore'
@@ -18,6 +20,7 @@ export default{
     name: 'list',
     components:{
         LHeader,
+        RHeader,
         LTag,
         ListData,
         ShowMore
@@ -40,7 +43,9 @@ export default{
                     shareCount:0,//分享
                     description: '',//描述
                     tags: [],//类型
-                }
+                },
+            isSongList: false
+            
        }
     },
     computed:{
@@ -90,11 +95,10 @@ export default{
         this.songs.id= this.$route.params.id;
         //  设置歌单图片  作者图片
         this.songs.coverImgUrl=this.$route.query.coverImgUrl;
-        this.songs.avatarUrl=this.$route.query.avatarUrl;  
-
+        this.isSongList= this.$route.query.hasOwnProperty('avatarUrl');
+        this.$route.query.hasOwnProperty('avatarUrl')?this.songs.avatarUrl=this.$route.query.avatarUrl:null;
         this.getSongsDetail(this.songs.id);
         this.getSongsComment(this.songs.id);  
-              
     }
 }
 </script>

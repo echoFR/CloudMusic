@@ -52,7 +52,7 @@
         </div>
         <div class="play-bottom">
             <div class="play-bottom-progress">
-                <span class="progress-current">02:42</span>
+                <span class="progress-current">{{currentTime}}</span>
                 <div class="progress-box">
                     <div class="progress-box-go">
                     </div>
@@ -60,7 +60,7 @@
                         <div class="dot"></div>
                     </div>
                 </div>
-                <span class="progress-total">04:10</span>
+                <span class="progress-total">{{duration}}</span>
             
             </div>
             <div class="play-bottom-tabBox">
@@ -123,6 +123,10 @@ export default{
             'playerStatus',//播放/暂停
             'playorder',// 播放顺序 1 顺序 2单曲 3随机
             'playerUrl',//歌曲url
+            'playerWord',
+            'songReady',
+            'duration',
+            'currentTime'            
         ]),
         upsongList(){
             //刷新后 歌单没有数据
@@ -172,7 +176,7 @@ export default{
                     
             });
             return currentSong;
-        }     
+        },     
     },
     methods:{
         ...mapMutations([
@@ -183,14 +187,20 @@ export default{
             'setplayerIndex',
             'setSonglist',
             'setPlayerStatus',
+            'setSongReady'
         ]),
         ...mapActions([
             'getSongUrl',
-            'getSongComment'
+            'getSongComment',
+            'getPlayerWord'
         ]),
         // 返回歌单
         goBack(){            
             this.$router.go(-1);
+        },
+        // 显示歌单
+        toshowList(){
+            this.showList();                        
         },
         swapShow(){
             this.showImg=!this.showImg;  
@@ -210,21 +220,28 @@ export default{
         },
         // 上一首
         upSong(){
+            if(!this.songReady){
+                return;
+            }
             if( this.upplayerIndex != -1 && this.upsongList.length > 1  ) {
-                    if ( this.upplayerIndex > 0 ) {
-                        localStorage.setItem('songindex',parseInt(this.upplayerIndex)-1);                        
-                        this.setplayerIndex(parseInt(this.upplayerIndex)-1);                        
-                        this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id});
-                        this.toPlay();                        
-                    } else {
-                        localStorage.setItem('songindex',parseInt(this.upplayerIndex.length)-1);                                            
-                        this.setplayerIndex(parseInt(this.upplayerIndex.length)-1);                        
-                        this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id}); 
-                        this.toPlay();                                                                   
-                    }
-            }     
+                if ( this.upplayerIndex > 0 ) {
+                    localStorage.setItem('songindex',parseInt(this.upplayerIndex)-1);                        
+                    this.setplayerIndex(parseInt(this.upplayerIndex)-1);                        
+                    this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id});
+                    this.toPlay();                        
+                } else {
+                    localStorage.setItem('songindex',parseInt(this.upsongList.length)-1);                                            
+                    this.setplayerIndex(parseInt(this.upsongList.length)-1);                        
+                    this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id}); 
+                    this.toPlay();                                                                   
+                }
+            }
+            this.setSongReady(false);                                                  
         },
-        downSong(){  
+        downSong(){
+            if(!this.songReady){
+                return;
+            } 
             if( this.upplayerIndex != -1 && this.upsongList.length > 1  ) {
                 if ( this.upplayerIndex < (this.upsongList.length-1) ) {
                     localStorage.setItem('songindex',parseInt(this.upplayerIndex)+1);
@@ -237,11 +254,14 @@ export default{
                     this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id});
                     this.toPlay();                    
                 }
-            }                                 
+            }
+            this.setSongReady(false);                                 
         },
         toPlay(){
             this.setPlayerStatus(true);                                
-            this.getSongUrl(this.upsongList[this.upplayerIndex].id);      
+            this.getSongUrl(this.upsongList[this.upplayerIndex].id);
+            // this.getPlayerWord(this.upsongList[this.upplayerIndex].id); 
+            // console.log(this.playerWord);
         },
         // 播放暂停
         Playing(){
@@ -251,15 +271,11 @@ export default{
             else{    
                 this.setPlayerStatus(true);                          
             }              
-        }, 
-        // 显示歌单
-        toshowList(){
-            this.showList();                        
         },
     },
     mounted(){
         this.toPlay();
-    }
+    },
 }
 </script>
 
