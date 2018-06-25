@@ -14,16 +14,15 @@ let state={
         comments: [], //   最新20条
         hotComments: []//热评
     },
-    //播放歌曲的歌单列表
+    originList: [],
+    //播放歌单列表
     songList:[],
-    // 播放的歌单
-    playerList:[],
     // 播放的序号
     playerIndex: -1,
     // 播放状态  暂停/播放
     playerStatus: false,
     // 播放顺序 1 顺序 2单曲 3随机  
-    playorder: 1,
+    playOrder: 1,
     playerUrl: null,
     playerWord: '',//歌词
     songReady: false,//歌曲ready
@@ -50,14 +49,11 @@ const getters={
     playerUrl:(state)=>{
         return state.playerUrl;
     },
-    playerList:(state)=>{
-        return state.playerList;
-    },
     playerStatus:(state)=>{
         return state.playerStatus;
     },
-    playorder:(state)=>{
-        return state.playorder;
+    playOrder:(state)=>{
+        return state.playOrder;
     },
     playerWord:(state)=>{
         return state.playerWord;
@@ -73,6 +69,9 @@ const getters={
     },
     designTime:()=>{
         return state.designTime;
+    },
+    originList:()=>{
+        return state.originList;
     }
 }
 const mutations={
@@ -119,15 +118,11 @@ const mutations={
     setplayerIndex(state,index){
         state.playerIndex=index;
     },
-    // 播放的歌单顺序
-    setPlayerList(state,list){
-        state.playerList=list;
-    },
     setPlayerStatus(state,status){
         state.playerStatus=status;
     },
-    setPlayorder(state,i){
-        state.playorder=i;
+    setPlayOrder(state,i){
+        state.playOrder=i;
     },
     setplayerUrl(state,url){
         state.playerUrl=url;
@@ -145,6 +140,9 @@ const mutations={
         state.currentTime=time;
     },
     setDesignTime(state,time){
+        state.designTime=time;
+    },
+    setOriginList(state,time){
         state.designTime=time;
     }
 }

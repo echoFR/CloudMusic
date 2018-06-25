@@ -23,16 +23,24 @@ import axios from 'axios'
 import {mapMutations,mapGetters} from 'vuex'
 export default{
     props: ['songsdata'],//歌单信息
+    computed:{
+        ...mapGetters([
+            'originList',
+        ])
+    },
     methods:{
         ...mapMutations([
             'filterSong',
             'setSonglist',
             'setplayerIndex',
-            'showMore'
+            'showMore',
+            'setOriginList'
         ]),
         // 跳到播放器 并且播放
         toPlayer(song,index){            
             // 当前歌曲数组
+            console.log(this.originList);
+            
             localStorage.setItem('songlist',JSON.stringify(this.songsdata.tracks));
             localStorage.setItem('songindex',index);
             this.setSonglist(this.songsdata.tracks);

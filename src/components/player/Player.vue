@@ -67,8 +67,9 @@
             <!-- 播放按钮 -->
             <div class="play-bottom-tabBox">
                 <div class="play-bottom-tab">
-                    <div class="tab-order" @click="playOrder()">
-                        <img src="@/assets/img/onlysong.png">
+                    <!-- 播放模式 -->
+                    <div class="tab-order" @click="changePlayOrder()">
+                        <img :src="playerMode">
                     </div>
                     <div class="upsong" @click="upSong()">
                         <img src="@/assets/img/upsong.png">
@@ -104,13 +105,15 @@ export default{
             showImg: true,
             stopBtn: require('@/assets/img/stop.png'),
             playingBtn: require('@/assets/img/playing.png'),
+            inOrder: require('@/assets/img/inorder.png'),
+            inSingle: require('@/assets/img/insingle.png') ,
+            inRandom: require('@/assets/img/inrandom.png'),
             comment:{
                 commentCount: 0,
                 comments:[],
                 hotComments: []
             },
             percent: 0,
-
         }
     },
     components:{
@@ -121,17 +124,17 @@ export default{
         ...mapGetters([
             'isShowMore',//显示更多
             'isShowList',//显示列表
-            'songList',//播放歌曲的歌单列表
-            'playerList',//播放顺序的歌单
+            'songList',
+            'originList',
             'playerIndex',//播放的序号
             'playerStatus',//播放/暂停
-            'playorder',// 播放顺序 1 顺序 2单曲 3随机
+            'playOrder',// 播放顺序 1 顺序 2单曲 3随机
             'playerUrl',//歌曲url
             'playerWord',
             'songReady',
             'duration',
             'currentTime',
-            'designTime'//拖动指定时间            
+            'designTime',//拖动指定时间
         ]),
         upsongList(){
             //刷新后 歌单没有数据
@@ -184,7 +187,18 @@ export default{
         },
         playerBtn(){
             return this.playerStatus? this.stopBtn: this.playingBtn;
-        },    
+        },
+        playerMode(){
+            if(this.playOrder==1){
+                return this.inOrder;
+            }
+            else if(this.playOrder==2){
+                return this.inSingle;
+            }
+            else if(this.playOrder==0){
+                return this.inRandom;
+            }
+        }    
     },
     methods:{
         ...mapMutations([
@@ -197,7 +211,8 @@ export default{
             'setPlayerStatus',
             'setSongReady',
             'setCurrentTime',
-            'setDesignTime'
+            'setDesignTime',
+            'setPlayOrder'
         ]),
         ...mapActions([
             'getSongUrl',
@@ -223,9 +238,11 @@ export default{
             this.$store.dispatch('getSongComment',this.upsongList[this.upplayerIndex].id);
             this.showMore();          
         },
-        // 播放顺序
-        playOrder(){
-            console.log('order');
+        // 播放顺序 改变播放顺序
+        changePlayOrder(){
+            let mode= (this.playOrder+1)%3;
+            this.setPlayOrder(mode);
+            console.log(this.songList);
         },
         // 上一首
         upSong(){
@@ -308,7 +325,7 @@ export default{
                 return;
             }
             const boxWidth= (this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
-            // // 拖动的时候go的width            
+            //  拖动的时候go的width            
             const goWidth= this.$refs.progressGo.clientWidth;            
             const percent = goWidth / boxWidth;
             // 改变当前播放时间
@@ -352,16 +369,16 @@ export default{
             this.$refs.progressGo.style.width= `${offsetWidth/10}rem`;
             this.$refs.progressDot.style["transform"] = `translate3d(${offsetWidth/10}rem, 0, 0)`;
         },
-        clickProgress(){
-            console.log('点击进度条');
-            // 改变位置
-            
-            // 改变播放状态
-            // if(!this.playerStatus){
-            //     this.setPlayerStatus(true);
-            // }
-            // console.log(this.playerStatus);
-            
+        clickProgress(event){
+            // rect.left 元素距离左边的距离
+            const rect = this.$refs.progressBox.getBoundingClientRect();
+            // event.pageX 点击距离左边的距离
+            const offsetWidth = event.pageX - rect.left;
+            this.setWidth(offsetWidth);
+
+            const boxWidth= (this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
+            const percent = this.$refs.progressGo.clientWidth / boxWidth;
+            this.percentChangeEnd(percent);
         }
     },
     created(){
@@ -383,7 +400,7 @@ export default{
                 // 设置进度条走过的width和按钮的偏移
                 this.setWidth(offsetWidth);
             }
-        }
+        },
     },
     mounted(){
         this.toPlay();
