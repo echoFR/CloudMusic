@@ -1,7 +1,7 @@
 <template>
   <div class="audio">
     <!-- autoplay loop -->
-      <audio :src="playerUrl" ref="audio" @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay loop></audio>
+      <audio :src="playerUrl" ref="audio" @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
 
       <!-- mini Player -->
       <div class="mini" v-show="miniPlay" @click="toPlayer()">
@@ -15,10 +15,11 @@
           </div>
         </div>
         <div class="mini-right">
-          <img :src="this.playerStatus?stopBtn:playingBtn" @click.stop="Playing()" ref="miniplay">
-          <img src="../../assets/img/more1.png" @click.stop="Morelist()">          
+          <img :src="playerBtn" @click.stop="Playing()" ref="miniplay">
+          <img src="@/assets/img/more1.png" @click.stop="Morelist()">          
         </div>
       </div>
+      <!-- 列表 -->
       <ShowList v-show="isShowList" :songlist='songList'></ShowList>
   </div>
 </template>
@@ -47,7 +48,8 @@ export default{
       'playerUrl',//歌曲url
       'miniPlay',
       'isShowList',
-      'songReady'
+      'songReady',
+      'duration'
     ]),
     upsongList(){
         //刷新后 歌单没有数据
@@ -74,6 +76,9 @@ export default{
             nowSong.singer+=' / '+song.ar[1].name
         }
       return nowSong;
+    },
+    playerBtn(){
+      return this.playerStatus? this.stopBtn: this.playingBtn
     },
   },
   methods:{
@@ -109,24 +114,14 @@ export default{
     },
     startPlay(){
       this.setSongReady(true);
+      // 获取歌曲总时间
+      this.setDuration(this.$refs.audio.duration);
     },
     error(){
       this.setSongReady(true);      
     },
-    timeUpdate(){
-      // console.log(this.format(this.$refs.audio.currentTime));
-      this.setCurrentTime(this.format(this.$refs.audio.currentTime));
-      // console.log(this.$refs.audio.duration);
-      console.log(this.format(this.$refs.audio.duration));
-    },
-    format (interval) {
-        interval = interval | 0
-        let minute = interval / 60 | 0
-        let second = interval % 60
-        if (second < 10) {
-            second = '0' + second
-        }
-        return minute + ':' + second
+    timeUpdate(event){
+      this.setCurrentTime(event.target.currentTime);
     },
   },
   watch:{
@@ -141,7 +136,14 @@ export default{
       });    
     },
     playerUrl(newV,oldV){
-      // console.log(this.format(this.$refs.audio.duration));
+      // let stop = setInterval(() => {
+      //   this.duration = this.$refs.audio.duration
+      //   console.log(this.format(this.duration));
+      //   if (this.duration) {
+      //     clearInterval(stop)
+      //   }
+      // }, 150)
+      
     }
   },
 }

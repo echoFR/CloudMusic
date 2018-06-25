@@ -49,25 +49,6 @@ axios.interceptors.response.use(function (response) {
   console.log("响应错误");  
   return Promise.reject(error);
 });
-
-if(!window.localStorage){
-  console('不支持local');
-}else{
-  let storage=window.localStorage;
-  // storage.setItem('a',3);
-  // // storage.getItem('a');
-  // storage.removeItem('a');
-
-  
-  // storage.a=1;
-  // storage.setItem("c",3);
-  // for(var i=0;i<storage.length;i++){
-  //     var key=storage.key(i);
-  //     console.log(key);
-  // }
-  
-}
-
 new Vue({
   el: '#app',
   router,

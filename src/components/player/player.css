@@ -196,6 +196,7 @@
     height: 3rem;
     position: absolute;
     top: -1.5rem;
+    left: 0;
 }
 .dot{
     position: relative;

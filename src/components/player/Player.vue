@@ -51,18 +51,20 @@
             </transition>
         </div>
         <div class="play-bottom">
+            <!-- 进度 -->
             <div class="play-bottom-progress">
-                <span class="progress-current">{{currentTime}}</span>
-                <div class="progress-box">
-                    <div class="progress-box-go">
+                <span class="progress-current">{{format(currentTime)}}</span>
+                <div class="progress-box" ref="progressBox">
+                    <div class="progress-box-go" ref="progressGo">
                     </div>
-                    <div class="progress-box-dot">
-                        <div class="dot"></div>
+                    <!-- 拖动按钮 -->
+                    <div class="progress-box-dot" ref="progressDot" @touchstart.prevent='touchStart' @touchmove.prevent='touchMove' @touchend='touchEnd'>
+                        <div class="dot" ref="dot"></div>
                     </div>
                 </div>
-                <span class="progress-total">{{duration}}</span>
-            
+                <span class="progress-total">{{format(duration)}}</span>
             </div>
+            <!-- 播放按钮 -->
             <div class="play-bottom-tabBox">
                 <div class="play-bottom-tab">
                     <div class="tab-order" @click="playOrder()">
@@ -72,7 +74,7 @@
                         <img src="@/assets/img/upsong.png">
                     </div>
                     <div class="playing" @click="Playing()">
-                        <img :src="this.playerStatus?stopBtn:playingBtn" ref="playBtn">
+                        <img :src="playerBtn" ref="playBtn">
                     </div>
                     <div class="downsong" @click="downSong()">
                         <img src="@/assets/img/downsong.png">
@@ -106,7 +108,9 @@ export default{
                 commentCount: 0,
                 comments:[],
                 hotComments: []
-            }
+            },
+            percent: 0,
+
         }
     },
     components:{
@@ -176,7 +180,10 @@ export default{
                     
             });
             return currentSong;
-        },     
+        },
+        playerBtn(){
+            return this.playerStatus? this.stopBtn: this.playingBtn;
+        },    
     },
     methods:{
         ...mapMutations([
@@ -209,7 +216,6 @@ export default{
             console.log('操作');
         },
         more(){ 
-            console.log(this.upsongList[this.upplayerIndex]);
             this.filterSong(this.upsongList[this.upplayerIndex]);
             this.$store.dispatch('getSongComment',this.upsongList[this.upplayerIndex].id);
             this.showMore();          
@@ -272,6 +278,45 @@ export default{
                 this.setPlayerStatus(true);                          
             }              
         },
+        format(interval) {
+            interval = interval | 0
+            let minute = interval / 60 | 0
+            if(minute < 10){
+                minute = '0' + minute;
+            }
+            let second = interval % 60
+            if (second < 10) {
+                second = '0' + second;
+            }
+            return minute + ':' + second
+        },
+        touchStart(){
+            console.log('start');
+        },
+        touchMove(){
+            console.log('move');
+        },
+        touchEnd(){
+            console.log('end');
+        }   
+        
+    },
+    watch:{
+        currentTime(newV,oldV){
+            this.percent= newV / this.duration;
+        },
+        // 歌曲播放
+        percent(newV,oldV){
+            if(newV >= 0){
+                 // 总长
+                const boxWidth=(this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
+                let offsetWidth= newV * boxWidth;
+                // 设置进度条走过的width和按钮的偏移
+                this.$refs.progressGo.style.width= `${offsetWidth/10}rem`;
+                this.$refs.progressDot.style["transform"] = `translate3d(${offsetWidth/10}rem, 0, 0)`;
+
+            }
+        }
     },
     mounted(){
         this.toPlay();
