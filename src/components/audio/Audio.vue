@@ -1,7 +1,7 @@
 <template>
   <div class="audio">
     <!-- autoplay loop -->
-      <audio :src="playerUrl" ref="audio" @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
+      <audio :src="playerUrl" ref="audio" @ended='ended' @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
 
       <!-- mini Player -->
       <div class="mini" v-show="miniPlay" @click="toPlayer()">
@@ -49,7 +49,9 @@ export default{
       'miniPlay',
       'isShowList',
       'songReady',
-      'duration'
+      'duration',
+      'currentTime',
+      'designTime',
     ]),
     upsongList(){
         //刷新后 歌单没有数据
@@ -123,6 +125,9 @@ export default{
     timeUpdate(event){
       this.setCurrentTime(event.target.currentTime);
     },
+    ended(){
+      console.log('播放完了');
+    }
   },
   watch:{
     playerStatus(newV,oldV){
@@ -143,7 +148,9 @@ export default{
       //     clearInterval(stop)
       //   }
       // }, 150)
-      
+    },
+    designTime(newV,oldV){
+      this.$refs.audio.currentTime=newV;              
     }
   },
 }

@@ -29,6 +29,7 @@ let state={
     songReady: false,//歌曲ready
     duration: 0,//时长
     currentTime: 0,//当前时长
+    designTime: 0,//拖动指定的时间
 }
 const getters={
     isShowMore:(state)=>{
@@ -69,6 +70,9 @@ const getters={
     },
     currentTime:(state)=>{
         return state.currentTime;
+    },
+    designTime:()=>{
+        return state.designTime;
     }
 }
 const mutations={
@@ -139,6 +143,9 @@ const mutations={
     },
     setCurrentTime(state,time){
         state.currentTime=time;
+    },
+    setDesignTime(state,time){
+        state.designTime=time;
     }
 }
 const actions={

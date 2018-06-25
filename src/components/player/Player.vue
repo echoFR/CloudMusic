@@ -54,7 +54,7 @@
             <!-- 进度 -->
             <div class="play-bottom-progress">
                 <span class="progress-current">{{format(currentTime)}}</span>
-                <div class="progress-box" ref="progressBox">
+                <div class="progress-box" ref="progressBox" @click="clickProgress">
                     <div class="progress-box-go" ref="progressGo">
                     </div>
                     <!-- 拖动按钮 -->
@@ -130,7 +130,8 @@ export default{
             'playerWord',
             'songReady',
             'duration',
-            'currentTime'            
+            'currentTime',
+            'designTime'//拖动指定时间            
         ]),
         upsongList(){
             //刷新后 歌单没有数据
@@ -194,7 +195,9 @@ export default{
             'setplayerIndex',
             'setSonglist',
             'setPlayerStatus',
-            'setSongReady'
+            'setSongReady',
+            'setCurrentTime',
+            'setDesignTime'
         ]),
         ...mapActions([
             'getSongUrl',
@@ -290,16 +293,80 @@ export default{
             }
             return minute + ':' + second
         },
-        touchStart(){
-            console.log('start');
+        // 拖动开始
+        touchStart(event){
+            // 拖动开始
+            this.touch.initiated= true;
+            // 拖动开始点击的位置  横向坐标
+            this.touch.startX= event.touches[0].pageX;            
+            // 此时progress-go的宽度
+            this.touch.goWidth= this.$refs.progressGo.clientWidth;
         },
-        touchMove(){
-            console.log('move');
+        touchMove(event){
+            // 是否开始拖动
+            if(!this.touch.initiated){
+                return;
+            }
+            const boxWidth= (this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
+            // // 拖动的时候go的width            
+            const goWidth= this.$refs.progressGo.clientWidth;            
+            const percent = goWidth / boxWidth;
+            // 改变当前播放时间
+            this.percentChange(percent);
+
+            // 当前拖动位置 和刚开拖动的偏移量
+            const overX= event.touches[0].pageX- this.touch.startX;
+            // offsetWidth 大于0    小于进度条的width
+            const offsetWidth= Math.min(Math.max(0, this.touch.goWidth + overX),boxWidth);
+            this.setWidth(offsetWidth);
         },
-        touchEnd(){
-            console.log('end');
-        }   
-        
+        // 拖动结束
+        touchEnd(event){
+            // 拖动结束
+            this.touch.initiated= false;
+            const boxWidth= (this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
+            // // 拖动的时候go的width            
+            const goWidth= this.$refs.progressGo.clientWidth;            
+            const percent = goWidth / boxWidth;
+            this.percentChangeEnd(percent);
+        },
+        // 拖动中途 改变当前播放时间 
+        percentChange(percent){
+            this.move = true
+            const currentTime = this.duration * percent;
+            this.setCurrentTime(currentTime);
+        },
+        // 拖动结束 改变当前播放时间
+        percentChangeEnd (percent) {
+            this.move = false
+            const currentTime = this.duration * percent;
+            // 设置指定时间
+            this.setDesignTime(currentTime);
+            // 暂停时候改变进度后 改变播放状态 
+            if (!this.playerStatus) {
+                this.setPlayerStatus(true);
+            }
+        },
+        // 设置进度条走过的width和按钮的偏移
+        setWidth(offsetWidth){
+            this.$refs.progressGo.style.width= `${offsetWidth/10}rem`;
+            this.$refs.progressDot.style["transform"] = `translate3d(${offsetWidth/10}rem, 0, 0)`;
+        },
+        clickProgress(){
+            console.log('点击进度条');
+            // 改变位置
+            
+            // 改变播放状态
+            // if(!this.playerStatus){
+            //     this.setPlayerStatus(true);
+            // }
+            // console.log(this.playerStatus);
+            
+        }
+    },
+    created(){
+        this.touch= {};
+        this.move= false;
     },
     watch:{
         currentTime(newV,oldV){
@@ -307,14 +374,14 @@ export default{
         },
         // 歌曲播放
         percent(newV,oldV){
-            if(newV >= 0){
+            // 拖动的时候不会setWidth
+            // !this.touch.initiated 没有拖动的时候
+            if(newV >= 0 && !this.touch.initiated){
                  // 总长
                 const boxWidth=(this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
                 let offsetWidth= newV * boxWidth;
                 // 设置进度条走过的width和按钮的偏移
-                this.$refs.progressGo.style.width= `${offsetWidth/10}rem`;
-                this.$refs.progressDot.style["transform"] = `translate3d(${offsetWidth/10}rem, 0, 0)`;
-
+                this.setWidth(offsetWidth);
             }
         }
     },
