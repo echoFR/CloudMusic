@@ -69,7 +69,7 @@
                 <div class="play-bottom-tab">
                     <!-- 播放模式 -->
                     <div class="tab-order" @click="changePlayMode()">
-                        <img :src="playerMode">
+                        <img :src="playerModeBtn">
                     </div>
                     <div class="upsong" @click="upSong()">
                         <img src="@/assets/img/upsong.png">
@@ -200,14 +200,14 @@ export default{
         playerBtn(){
             return this.playerStatus? this.stopBtn: this.playingBtn;
         },
-        playerMode(){
-            if(this.playMode==ModeConfig.inOrder){
+        playerModeBtn(){
+            if(this.playMode===ModeConfig.inOrder){
                 return this.inOrder;
             }
-            else if(this.playMode==ModeConfig.inSingle){
+            else if(this.playMode===ModeConfig.inSingle){
                 return this.inSingle;
             }
-            else if(this.playMode==ModeConfig.inRandom){
+            else if(this.playMode===ModeConfig.inRandom){
                 return this.inRandom;
             }
         }    
@@ -256,13 +256,15 @@ export default{
             // 改变播放模式
             let mode= (this.playMode+1)%3;
             this.setPlayMode(mode);
-            let list= null;
-            // 随机播放改变列表 songList
-            if(mode === ModeConfig.inRandom){
-                // 初始列表
+            // 根据模式改变播放歌列表
+            this.ModeChangeList(mode);
+        },
+        // 根据模式改变播放歌列表        
+        ModeChangeList(mode){
+            let list= null;        
+            if(mode===ModeConfig.inRandom){
                 list= shuffle(this.uporiginList);
             }else{
-                //顺序播放和循环播放
                 list= this.uporiginList;
             }
             //更改当前playIndex
@@ -438,7 +440,8 @@ export default{
         },
     },
     mounted(){
-        
+        // 根据模式改变播放歌列表
+        this.ModeChangeList(this.playMode);
         this.toPlay();
     },
 }

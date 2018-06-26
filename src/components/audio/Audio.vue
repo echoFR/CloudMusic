@@ -1,7 +1,7 @@
 <template>
   <div class="audio">
     <!-- autoplay loop -->
-      <audio :src="playerUrl" ref="audio" @ended='ended' @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
+      <audio :src="playerUrl" ref="audio" @ended='playEnd' @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
 
       <!-- mini Player -->
       <div class="mini" v-show="miniPlay" @click="toPlayer()">
@@ -26,6 +26,8 @@
 <script>
 import {mapGetters,mapMutations, mapActions} from 'vuex'
 import ShowList from '@/base/showlist/ShowList'
+import {ModeConfig} from '@/assets/js/config.js'
+
 export default{
   data(){
     return{
@@ -45,7 +47,7 @@ export default{
       'originList',
       'playerIndex',//播放的序号
       'playerStatus',//播放/暂停
-      'playMode',// 播放顺序 1 顺序 2单曲 3随机
+      'playMode',
       'playerUrl',//歌曲url
       'miniPlay',
       'isShowList',
@@ -135,8 +137,43 @@ export default{
     timeUpdate(event){
       this.setCurrentTime(event.target.currentTime);
     },
-    ended(){
-      console.log('播放完了');
+    playEnd(){
+      if(this.playMode===ModeConfig.inSingle){
+        // 单曲循环
+        this.singleLoop();
+      }else{
+        //随机  顺序 自动播放下一首
+        this.downSong();
+      }
+    },
+    downSong(){
+      if(!this.songReady){
+          return;
+      } 
+      if( this.upplayerIndex != -1 && this.upsongList.length > 1  ) {
+          if ( this.upplayerIndex < (this.upsongList.length-1) ) {
+              localStorage.setItem('songindex',parseInt(this.upplayerIndex)+1);
+              this.setplayerIndex(parseInt(this.upplayerIndex)+1);
+              this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id});
+              this.toPlay();
+          } else {
+              localStorage.setItem('songindex',0);                    
+              this.setplayerIndex(0);
+              this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id});
+              this.toPlay();                    
+          }
+      }
+      this.setSongReady(false);                                 
+    },
+    toPlay(){
+      this.setPlayerStatus(true);                                
+      this.getSongUrl(this.upsongList[this.upplayerIndex].id);
+      // this.getPlayerWord(this.upsongList[this.upplayerIndex].id); 
+      // console.log(this.playerWord);
+    },
+    singleLoop(){
+      this.setCurrentTime(0);
+      this.$refs.audio.play();
     }
   },
   watch:{
@@ -151,6 +188,7 @@ export default{
       });    
     },
     playerUrl(newV,oldV){
+      // 获取总时长
       // let stop = setInterval(() => {
       //   this.duration = this.$refs.audio.duration
       //   console.log(this.format(this.duration));
