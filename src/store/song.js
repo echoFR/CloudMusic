@@ -21,7 +21,7 @@ let state={
     playerIndex: -1,
     // 播放状态  暂停/播放
     playerStatus: false,
-    // 播放顺序 1 顺序 2单曲 3随机  
+    // 播放顺序 1 顺序 2单曲 0随机  
     playOrder: 1,
     playerUrl: null,
     playerWord: '',//歌词
@@ -142,8 +142,8 @@ const mutations={
     setDesignTime(state,time){
         state.designTime=time;
     },
-    setOriginList(state,time){
-        state.designTime=time;
+    setOriginList(state,list){
+        state.originList=list;
     }
 }
 const actions={

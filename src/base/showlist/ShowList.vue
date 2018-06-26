@@ -17,7 +17,8 @@
                 </div>
                 <div class="list-bottom">
                     <ul class="list-bottom-ul">
-                        <li v-for="(item,index) in songlist" @click="toPlay(index)" :key="index" ref="list" :class="{colorRed: ((index==playerIndex)?isRed:!isRed)}">
+                        <!-- :class="{colorRed: ((index==playerIndex)?isRed:!isRed)}" -->
+                        <li v-for="(item,index) in songlist" @click="toPlay(index)" :key="index" ref="list">
                             <div class="list-bottom-text" >
                                 <span class="list-bottom-index">{{index+1}}-</span>
                                 <span>{{item.name}}</span>

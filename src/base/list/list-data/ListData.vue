@@ -39,12 +39,11 @@ export default{
         // 跳到播放器 并且播放
         toPlayer(song,index){            
             // 当前歌曲数组
-            console.log(this.originList);
-            
+            localStorage.setItem('originlist',JSON.stringify(this.songsdata.tracks));
             localStorage.setItem('songlist',JSON.stringify(this.songsdata.tracks));
             localStorage.setItem('songindex',index);
+            this.setOriginList(this.songsdata.tracks);
             this.setSonglist(this.songsdata.tracks);
-            // 序号
             this.setplayerIndex(index);
             this.$router.push({path:'/player/'+song.id});
         },

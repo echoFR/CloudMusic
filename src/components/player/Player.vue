@@ -14,7 +14,7 @@
     </div>
     <div class="pshow">
         <ShowMore v-show="isShowMore"></ShowMore>
-        <ShowList v-show="isShowList" :songlist='songList'></ShowList>
+        <ShowList v-show="isShowList" :songlist='uporiginList'></ShowList>
         <div class="pshow-top" @click="swapShow()">
             <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div class="pshow-top-song" v-show="showImg">
@@ -98,6 +98,10 @@ import ShowMore from '@/base/list/list-showmore/ShowMore'
 import ShowList from '@/base/showlist/ShowList'
 import axios from 'axios'
 import {mapMutations,mapGetters,mapActions} from 'vuex'
+import {shuffle} from '@/assets/js/util.js'
+// 播放模式
+import {ModeConfig} from '@/assets/js/config.js'
+
 export default{
     name: 'player',
     data(){
@@ -143,6 +147,14 @@ export default{
                 this.setSonglist(songlist);
             }
             return this.songList;
+        },
+        uporiginList(){
+            //刷新后 歌单没有数据
+            if(this.originList.length==0){
+                let originlist=JSON.parse(localStorage.getItem('originlist'));
+                this.setOriginList(originlist);
+            }
+            return this.originList;
         },
         upplayerIndex(){
             if(this.playerIndex==-1){
@@ -208,6 +220,7 @@ export default{
             'setplayerUrl',
             'setplayerIndex',
             'setSonglist',
+            'setOriginList',
             'setPlayerStatus',
             'setSongReady',
             'setCurrentTime',
@@ -240,10 +253,24 @@ export default{
         },
         // 播放顺序 改变播放顺序
         changePlayOrder(){
+            // 改变播放模式
             let mode= (this.playOrder+1)%3;
             this.setPlayOrder(mode);
-            console.log(this.songList);
+            let list= null;
+            // 随机播放改变列表 songList
+            if(mode === ModeConfig.inRandom){
+                // 初始列表
+                list= shuffle(this.originList);
+                
+            }else{//顺序播放和循环播放
+                list= this.originList;
+            }
+            // 改变播放歌曲列表
+            this.setSonglist(list);
+            localStorage.setItem('songlist',JSON.stringify(list));
+            // playerIndex
         },
+        // resetPlay
         // 上一首
         upSong(){
             if(!this.songReady){

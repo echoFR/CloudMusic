@@ -20,7 +20,7 @@
         </div>
       </div>
       <!-- 列表 -->
-      <ShowList v-show="isShowList" :songlist='songList'></ShowList>
+      <ShowList v-show="isShowList" :songlist='uporiginList'></ShowList>
   </div>
 </template>
 <script>
@@ -42,6 +42,7 @@ export default{
       'playerUrl',
       'songList',//播放歌曲的歌单列表
       'playerList',//播放顺序的歌单
+      'originList',
       'playerIndex',//播放的序号
       'playerStatus',//播放/暂停
       'playorder',// 播放顺序 1 顺序 2单曲 3随机
@@ -67,6 +68,14 @@ export default{
         }
         return this.playerIndex;
     },
+    uporiginList(){
+      //刷新后 歌单没有数据
+      if(this.originList.length==0){
+          let originlist=JSON.parse(localStorage.getItem('originlist'));
+          this.setOriginList(originlist);
+      }
+      return this.originList;
+        },
     nowSong(){
       let song=this.upsongList[this.upplayerIndex];
       let nowSong={};
@@ -86,6 +95,7 @@ export default{
   methods:{
     ...mapMutations([
       'setSonglist',
+      'setOriginList',
       'setplayerIndex',
       'setPlayerStatus',
       'showList',
@@ -150,7 +160,11 @@ export default{
       // }, 150)
     },
     designTime(newV,oldV){
-      this.$refs.audio.currentTime=newV;              
+      this.$refs.audio.currentTime=newV;
+    },
+    uporiginList(newV,oldV){
+      console.log('变');
+      
     }
   },
 }
