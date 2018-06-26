@@ -45,7 +45,7 @@ export default{
       'originList',
       'playerIndex',//播放的序号
       'playerStatus',//播放/暂停
-      'playorder',// 播放顺序 1 顺序 2单曲 3随机
+      'playMode',// 播放顺序 1 顺序 2单曲 3随机
       'playerUrl',//歌曲url
       'miniPlay',
       'isShowList',
@@ -161,10 +161,6 @@ export default{
     },
     designTime(newV,oldV){
       this.$refs.audio.currentTime=newV;
-    },
-    uporiginList(newV,oldV){
-      console.log('变');
-      
     }
   },
 }

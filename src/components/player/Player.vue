@@ -68,7 +68,7 @@
             <div class="play-bottom-tabBox">
                 <div class="play-bottom-tab">
                     <!-- 播放模式 -->
-                    <div class="tab-order" @click="changePlayOrder()">
+                    <div class="tab-order" @click="changePlayMode()">
                         <img :src="playerMode">
                     </div>
                     <div class="upsong" @click="upSong()">
@@ -132,7 +132,7 @@ export default{
             'originList',
             'playerIndex',//播放的序号
             'playerStatus',//播放/暂停
-            'playOrder',// 播放顺序 1 顺序 2单曲 3随机
+            'playMode',// 播放顺序 1 顺序 2单曲 3随机
             'playerUrl',//歌曲url
             'playerWord',
             'songReady',
@@ -201,13 +201,13 @@ export default{
             return this.playerStatus? this.stopBtn: this.playingBtn;
         },
         playerMode(){
-            if(this.playOrder==1){
+            if(this.playMode==ModeConfig.inOrder){
                 return this.inOrder;
             }
-            else if(this.playOrder==2){
+            else if(this.playMode==ModeConfig.inSingle){
                 return this.inSingle;
             }
-            else if(this.playOrder==0){
+            else if(this.playMode==ModeConfig.inRandom){
                 return this.inRandom;
             }
         }    
@@ -225,7 +225,7 @@ export default{
             'setSongReady',
             'setCurrentTime',
             'setDesignTime',
-            'setPlayOrder'
+            'setPlayMode'
         ]),
         ...mapActions([
             'getSongUrl',
@@ -251,26 +251,34 @@ export default{
             this.$store.dispatch('getSongComment',this.upsongList[this.upplayerIndex].id);
             this.showMore();          
         },
-        // 播放顺序 改变播放顺序
-        changePlayOrder(){
+        //  改变播放模式
+        changePlayMode(){
             // 改变播放模式
-            let mode= (this.playOrder+1)%3;
-            this.setPlayOrder(mode);
+            let mode= (this.playMode+1)%3;
+            this.setPlayMode(mode);
             let list= null;
             // 随机播放改变列表 songList
             if(mode === ModeConfig.inRandom){
                 // 初始列表
-                list= shuffle(this.originList);
-                
-            }else{//顺序播放和循环播放
-                list= this.originList;
+                list= shuffle(this.uporiginList);
+            }else{
+                //顺序播放和循环播放
+                list= this.uporiginList;
             }
+            //更改当前playIndex
+            this.changePlayerIndex(list);
             // 改变播放歌曲列表
             this.setSonglist(list);
             localStorage.setItem('songlist',JSON.stringify(list));
-            // playerIndex
         },
-        // resetPlay
+        changePlayerIndex(list){
+            // 当前歌曲在songlist的index            
+            let index=list.findIndex((item)=>{
+                return item.id == this.upsongList[this.upplayerIndex].id;
+            });
+            this.setplayerIndex(index);
+            localStorage.setItem('songindex',index);            
+        },
         // 上一首
         upSong(){
             if(!this.songReady){
@@ -430,6 +438,7 @@ export default{
         },
     },
     mounted(){
+        
         this.toPlay();
     },
 }

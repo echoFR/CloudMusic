@@ -5,11 +5,11 @@
             <div class="show-list" id="showListMore" @click="stopBubble">
                 <div class="list-top">
                     <div class="list-top-title">
-                        <span class="songs-name">单曲循环</span>
+                        <span class="songs-name">单曲循环{{playerIndex}}</span>
                     </div>
                     <div class="select">
                         <img src="@/assets/img/shoucj.png" align="absmiddle">
-                        <span class="select-text">收藏全部</span>
+                        <span class="select-text">收藏全部{{inOriginIndex}}</span>
                     </div>
                     <span class="remove">
                         <img src="@/assets/img/remove.png">    
@@ -17,8 +17,7 @@
                 </div>
                 <div class="list-bottom">
                     <ul class="list-bottom-ul">
-                        <!-- :class="{colorRed: ((index==playerIndex)?isRed:!isRed)}" -->
-                        <li v-for="(item,index) in songlist" @click="toPlay(index)" :key="index" ref="list">
+                        <li v-for="(item,index) in songlist" @click="toPlay(index)" :key="index" ref="list" :class="{colorRed: ((index==inOriginIndex)?true:false)}">
                             <div class="list-bottom-text" >
                                 <span class="list-bottom-index">{{index+1}}-</span>
                                 <span>{{item.name}}</span>
@@ -37,10 +36,21 @@ import stopBubble from '@/assets/js/stopBubble'
 import {mapGetters,mapActions, mapMutations} from 'vuex'
 export default{
     props:['songlist'],
-    data(){
-        return{
-            isRed: true 
-        }
+    computed:{
+        ...mapGetters([
+            'playerIndex',
+            'playerStatus',
+            'songList',
+            'originList'
+        ]),
+        // 当前播放歌曲在初始列表的位置index
+        inOriginIndex(){
+            let currentSong= this.songList[this.playerIndex];
+            let index=this.originList.findIndex((item)=>{
+                return item.id=== currentSong.id;
+            });
+            return index; 
+        },
     },
     methods:{
         ...mapMutations([
@@ -51,7 +61,6 @@ export default{
         ...mapActions([
             'getSongUrl'
         ]),
-        // 隐藏list
         hide(){  
             this.hideList();
         },
@@ -67,12 +76,9 @@ export default{
             this.$router.replace({path: '/player/' + this.songList[this.playerIndex].id});
         }
     },
-    computed:{
-        ...mapGetters([
-            'playerIndex',
-            'playerStatus',
-            'songList',//播放歌曲的歌单列表
-        ])
+    mounted(){
+        console.log(this.originList[2].name);
+        console.log(this.songList[2].name);
     }
 }
 </script>

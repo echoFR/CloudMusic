@@ -22,7 +22,7 @@ let state={
     // 播放状态  暂停/播放
     playerStatus: false,
     // 播放顺序 1 顺序 2单曲 0随机  
-    playOrder: 1,
+    playMode: 1,
     playerUrl: null,
     playerWord: '',//歌词
     songReady: false,//歌曲ready
@@ -52,8 +52,8 @@ const getters={
     playerStatus:(state)=>{
         return state.playerStatus;
     },
-    playOrder:(state)=>{
-        return state.playOrder;
+    playMode:(state)=>{
+        return state.playMode;
     },
     playerWord:(state)=>{
         return state.playerWord;
@@ -121,8 +121,8 @@ const mutations={
     setPlayerStatus(state,status){
         state.playerStatus=status;
     },
-    setPlayOrder(state,i){
-        state.playOrder=i;
+    setPlayMode(state,i){
+        state.playMode=i;
     },
     setplayerUrl(state,url){
         state.playerUrl=url;
