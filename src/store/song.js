@@ -24,11 +24,13 @@ let state={
     // 播放顺序 1 顺序 2单曲 0随机  
     playMode: 1,
     playerUrl: null,
-    playerWord: '',//歌词
+    lyric: [], //歌词
+    parsedLyric:[],//解析后的歌词
     songReady: false,//歌曲ready
     duration: 0,//时长
     currentTime: 0,//当前时长
     designTime: 0,//拖动指定的时间
+    isLoadLyric: true
 }
 const getters={
     isShowMore:(state)=>{
@@ -55,9 +57,6 @@ const getters={
     playMode:(state)=>{
         return state.playMode;
     },
-    playerWord:(state)=>{
-        return state.playerWord;
-    },
     songReady:(state)=>{
         return state.songReady;
     },
@@ -67,11 +66,17 @@ const getters={
     currentTime:(state)=>{
         return state.currentTime;
     },
-    designTime:()=>{
+    designTime:(state)=>{
         return state.designTime;
     },
-    originList:()=>{
+    originList:(state)=>{
         return state.originList;
+    },
+    lyric:(state)=>{
+        return state.lyric;
+    },
+    isLoadLyric:(state)=>{
+        return state.isLoadLyric;
     }
 }
 const mutations={
@@ -127,9 +132,6 @@ const mutations={
     setplayerUrl(state,url){
         state.playerUrl=url;
     },
-    setPlayerWord(state,word){
-        state.playerWord=word;
-    },
     setSongReady(state,status){
         state.songReady=status;
     },
@@ -144,6 +146,35 @@ const mutations={
     },
     setOriginList(state,list){
         state.originList=list;
+    },
+    setLyric(state,text){
+        let by='';
+        let lines = text.split('\n');
+        let pattern = /\[\d{2}:\d{2}.(\d{3}|\d{2})\]/g;
+        let result = [];
+        while (!pattern.test(lines[0])) {
+            by= lines[0];
+            lines = lines.slice(1);
+        };
+        lines[lines.length - 1].length === 0 && lines.pop();
+        lines.forEach(function(v,i,a) {
+            //这一行的 时间
+            let time = v.match(pattern);
+            // '' 取代正则
+            let value = v.replace(pattern, '');
+            time.forEach(function(v1, i1, a1) {
+                var t = v1.slice(1, -1).split(':');
+                if( value != "" && value != " ")
+                    result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), value]);
+            });
+        });
+        result.sort(function(a, b) {
+            return a[0] - b[0];
+        });
+        state.lyric=result;
+    },
+    hideLoadLyric(state){
+        state.isLoadLyric= false;
     }
 }
 const actions={
@@ -171,13 +202,15 @@ const actions={
                 console.log('请求失败');
         }); 
     },
-    getPlayerWord:({commit,state},songid)=>{
+    getLyric:({commit,state},songid)=>{
         axios.get('http://localhost:3000/lyric?id='+songid).then((res)=>{
-            commit('setPlayerWord',res.data.lrc.lyric);
+            let text =res.data.lrc.lyric;
+            commit('setLyric',text);
+            commit('hideLoadLyric');
         }).catch((err)=>{
             console.log(err);
             console.log('获取歌词失败');
-        });   
+        }); 
     }
 }
 export default{

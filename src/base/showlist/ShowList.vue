@@ -1,7 +1,6 @@
 <template>
     <transition name="showlist" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
         <div class="mask" @click="hideList">
-            
             <div class="show-list" id="showListMore" @click="stopBubble">
                 <div class="list-top">
                     <div class="list-top-title">
@@ -16,8 +15,8 @@
                     </span>                    
                 </div>
                 <div class="list-bottom">
-                    <ul class="list-bottom-ul">
-                        <li v-for="(item,index) in songlist" @click="toPlay(index)" :key="index" ref="list" :class="{colorRed: ((index==inOriginIndex)?true:false)}">
+                    <ul class="list-bottom-ul" ref="listUl">
+                        <li v-for="(item,index) in songlist" @click="toPlay(index)" :key="index" :class="{colorRed: ((index==inOriginIndex)?true:false)}">
                             <div class="list-bottom-text" >
                                 <span class="list-bottom-index">{{index+1}}-</span>
                                 <span>{{item.name}}</span>
@@ -43,7 +42,8 @@ export default{
             'playerStatus',
             'songList',
             'originList',
-            'playMode'
+            'playMode',
+            'lyric'
         ]),
         // 当前播放歌曲在初始列表的位置index
         inOriginIndex(){
@@ -69,10 +69,12 @@ export default{
         ...mapMutations([
             'setplayerIndex',
             'hideList',
-            'setPlayerStatus'
+            'setPlayerStatus',
+            'ParseLyric'
         ]),
         ...mapActions([
-            'getSongUrl'
+            'getSongUrl',
+            'getLyric'
         ]),
         // 防止冒泡
         stopBubble(){
@@ -84,10 +86,12 @@ export default{
                 return item.id=== toPlaySong.id;
             })
             localStorage.setItem('songindex',toIndex);                                            
-            this.setplayerIndex(toIndex); 
-            this.getSongUrl(this.songList[this.playerIndex].id);                     
+            this.setplayerIndex(toIndex);
+            this.setPlayerStatus(true);
+            this.getSongUrl(this.songList[this.playerIndex].id); 
+            this.getLyric(this.songList[this.playerIndex].id);
         }
-    }
+    },
 }
 </script>
 <style>

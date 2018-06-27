@@ -23,13 +23,13 @@
                         <div class="pshow-top-border"></div>
                     </div>
                     <div class="pshow-top-songtag">
-                        <span @click.stop="stop()">
+                        <span>
                             <img src="@/assets/img/shouc2.png">
                         </span>
-                        <span @click.stop="stop()">
+                        <span>
                             <img src="@/assets/img/down.png">                
                         </span>
-                        <span @click.stop="stop()">
+                        <span>
                             <img src="@/assets/img/comment.png">
                             <span class="commentCount">{{ comment.commentCount }}</span>
                         </span>
@@ -39,12 +39,15 @@
                     </div>
                 </div>
             </transition>
+            <!-- 歌词 -->
             <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div class="pshow-top-songword" v-show="!showImg">
-                    <div class="songword-box">
-                        <ul>                          
-                            <li>bbbb</li>                        
-                            <li>bbbb</li>                                                
+                    <div class="songword-box" :style="{transform: 'translate3d(0,'+LyricTop+'rem,0)'}">
+                        <span v-show="isLoadLyric">{{ loadLyric }}</span>
+                        <ul ref="lyricUl">
+                            <li v-for="(item,index) in this.lyric" :key="index">
+                                {{item[1]}}
+                            </li> 
                         </ul>
                     </div>
                 </div>
@@ -118,6 +121,9 @@ export default{
                 hotComments: []
             },
             percent: 0,
+            loadLyric: '加载歌词中....',
+            LyricTop: 0,
+            LyricLiHeight: 2
         }
     },
     components:{
@@ -134,11 +140,12 @@ export default{
             'playerStatus',//播放/暂停
             'playMode',// 播放顺序 1 顺序 2单曲 3随机
             'playerUrl',//歌曲url
-            'playerWord',
             'songReady',
             'duration',
             'currentTime',
             'designTime',//拖动指定时间
+            'lyric',
+            'isLoadLyric'
         ]),
         upsongList(){
             //刷新后 歌单没有数据
@@ -225,12 +232,12 @@ export default{
             'setSongReady',
             'setCurrentTime',
             'setDesignTime',
-            'setPlayMode'
+            'setPlayMode',
         ]),
         ...mapActions([
             'getSongUrl',
             'getSongComment',
-            'getPlayerWord'
+            'getLyric'
         ]),
         // 返回歌单
         goBack(){            
@@ -242,9 +249,6 @@ export default{
         },
         swapShow(){
             this.showImg=!this.showImg;  
-        },
-        stop(){
-            console.log('操作');
         },
         more(){ 
             this.filterSong(this.upsongList[this.upplayerIndex]);
@@ -323,8 +327,7 @@ export default{
         toPlay(){
             this.setPlayerStatus(true);                                
             this.getSongUrl(this.upsongList[this.upplayerIndex].id);
-            // this.getPlayerWord(this.upsongList[this.upplayerIndex].id); 
-            // console.log(this.playerWord);
+            this.getLyric(this.upsongList[this.upplayerIndex].id);
         },
         // 播放暂停
         Playing(){
@@ -416,7 +419,7 @@ export default{
             const boxWidth= (this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
             const percent = this.$refs.progressGo.clientWidth / boxWidth;
             this.percentChangeEnd(percent);
-        }
+        },
     },
     created(){
         this.touch= {};
@@ -424,6 +427,13 @@ export default{
     },
     watch:{
         currentTime(newV,oldV){
+            for(let i=0;i<this.lyric.length;i++){
+                if(newV>=this.lyric[i][0]){
+                    if(i>=0){
+                        this.LyricTop=-(this.LyricLiHeight*i);
+                    }
+                }
+            }
             this.percent= newV / this.duration;
         },
         // 歌曲播放
@@ -441,8 +451,8 @@ export default{
     },
     mounted(){
         // 根据模式改变播放歌列表
-        this.ModeChangeList(this.playMode);
         this.toPlay();
+        this.ModeChangeList(this.playMode);
     },
 }
 </script>
