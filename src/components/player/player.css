@@ -143,12 +143,13 @@
     width: 100%;
     height: 100%;
     position: relative;
-    overflow: auto;
+    overflow: hidden;
     color: #eee;
 }
 .songword-box{
     width: 100%;
     text-align: center;
+    transition: all 0.5s;    
 }
 .songword-box ul{
     width: 100%;

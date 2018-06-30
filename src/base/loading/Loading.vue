@@ -1,20 +1,15 @@
 <template>
-    <div class="loading" v-show="isShowLoading">
-        <img src="@/assets/img/getmore3.gif" align="absmiddle">{{loadData}}
+    <div class="loading">
+        <img src="./loading.gif" align="absmiddle">{{loadText}}
     </div>
 </template>
 <script>
-import {mapActions,mapGetters} from 'vuex'
     export default{
-        data(){
-            return{
-                loadData: '努力加载更多...',
+        props:{
+            loadText:{
+                type: String,
+                default: '努力加载中...'
             }
-        },
-        computed:{
-            ...mapGetters([
-                'isShowLoading'//显示load
-            ]),
         }
     }
 </script>
@@ -24,13 +19,13 @@ import {mapActions,mapGetters} from 'vuex'
     width: 100%;
     background-color: #EFEFEF;
     text-align: center;
+    padding: 8rem 0;
     font-size: 1.5rem;
-    margin-top: 3rem;
 }
 .loading img{
-    margin-right: 3rem;
-    width: 3rem;
-    height: 3rem;
+    margin-right: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 </style>
 

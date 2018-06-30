@@ -106,7 +106,8 @@ export default{
       'setCurrentTime'
     ]),
     ...mapActions([
-      'getSongUrl'
+      'getSongUrl',
+      'getLyric'
     ]),
     // mini Player 播放暂停
     Playing(){
@@ -154,12 +155,10 @@ export default{
           if ( this.upplayerIndex < (this.upsongList.length-1) ) {
               localStorage.setItem('songindex',parseInt(this.upplayerIndex)+1);
               this.setplayerIndex(parseInt(this.upplayerIndex)+1);
-              this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id});
               this.toPlay();
           } else {
               localStorage.setItem('songindex',0);                    
               this.setplayerIndex(0);
-              this.$router.replace({path: '/player/' + this.upsongList[this.upplayerIndex].id});
               this.toPlay();                    
           }
       }
@@ -168,8 +167,7 @@ export default{
     toPlay(){
       this.setPlayerStatus(true);                                
       this.getSongUrl(this.upsongList[this.upplayerIndex].id);
-      // this.getPlayerWord(this.upsongList[this.upplayerIndex].id); 
-      // console.log(this.playerWord);
+      this.getLyric(this.upsongList[this.upplayerIndex].id);
     },
     singleLoop(){
       this.setCurrentTime(0);

@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-top">
       <router-link to="/info" class="more"><img src="@/assets/img/more.png"></router-link>
-      <router-link to="/search" class="search"><img src="@/assets/img/search.png"></router-link>      
+      <router-link to="/search" class="searchbtn"><img src="@/assets/img/search.png"></router-link>      
       <div class="text">Music Echo</div>
     </div>
     <div class="header-bottom">
@@ -37,7 +37,7 @@
     background-color: #d23023;
     font-size: 1.9rem;
 }
-.more,.search{
+.more,.searchbtn{
     width: 4rem;
     height: 4rem;
     position: absolute;
@@ -46,10 +46,10 @@
 .more{
     left: 0;    
 }
-.search{
+.searchbtn{
     right: 0;
 } 
-.more img,.search img{
+.more img,.searchbtn img{
     width: 3rem;
     height: 3rem;
 }

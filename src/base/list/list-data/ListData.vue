@@ -1,6 +1,6 @@
 <template>
     <div class="songslist-con">
-        <Loading></Loading>
+        <Loading v-show="isShowLoading"></Loading>
         <ul class="songslist-con-ul">
             <li v-for="(item,index) in songsdata.tracks" :key="index">  
                 <div class="songslist-con-box"  @click="toPlayer(item,index)">
@@ -26,6 +26,7 @@ export default{
     computed:{
         ...mapGetters([
             'originList',
+            'isShowLoading'
         ])
     },
     methods:{

@@ -1,0 +1,38 @@
+.search-box{
+    background-color: #d23023;
+    height: 3rem;
+    padding: 1rem 0;
+    position: relative;
+    width: 100%;
+}
+.search-box-left{
+    width: 10%;
+    float: left;
+}
+.search-box-right{
+    width: 90%;
+    float: left;
+}
+.goback{
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-left: 0.5rem;
+}
+input.search-input{
+    background-color: #d23023;
+    outline: none;
+    border: none;
+    border-bottom: 0.05rem #eee solid;
+    height: 3rem;
+    font-size: 1.8rem;
+    color: #eee;
+    width: 94%;
+    margin-left: 2%;
+}
+.close{
+    width: 1.8rem;
+    height: 1.8rem;
+    position: absolute;
+    top: 1.5rem;
+    right: 4%;
+}

@@ -1,63 +1,33 @@
-.hot-search-header{
-    background-color: #d23023;
-    height: 3rem;
-    padding: 1rem 0;
-    position: relative;
+.search{
+    background-color: #EFEFEF;
+    font-size: 1.5rem;
+    margin-bottom: 5rem;
     width: 100%;
-    margin-bottom: 1rem;
+    /* height: 100%; */
+    /* position: fixed;   */
 }
-.hot-search-header-left{
-    width: 10%;
-    float: left;
-}
-.hot-search-header-right{
-    width: 90%;
-    float: left;
-}
-.goback{
-    width: 2.8rem;
-    height: 2.8rem;
-    margin-left: 0.5rem;
-}
-input.search-input{
-    background-color: #d23023;
-    outline: none;
-    border: none;
-    border-bottom: 0.05rem #eee solid;
-    height: 3rem;
-    font-size: 1.8rem;
-    color: #eee;
-    width: 94%;
-    margin-left: 2%;
-}
-.close{
-    width: 1.8rem;
-    height: 1.8rem;
-    position: absolute;
-    top: 1.5rem;
-    right: 4%;
-}
-
 /* 热门搜索 */
-.popular-search{
+.hot-search{
     width: 100%;
 }
-.popular-search-title{
+.hot-search-title{
     width: 98%;
     font-size: 1.3rem;
     color: rgb(133, 132, 132);
     padding: 1rem 1% 0 1%;
 }
-.popular-search-tip{
+.hot-search-tip{
     width: 98%;
     padding: 0 1%;
     overflow: hidden;
     font-size: 1.4rem;
 }
-.popular-tip{
+.hot-tip{
     padding: 0.5rem;
     border: 0.05rem solid rgb(119, 114, 114);
     border-radius: 1.5rem;
     float: left;
     margin: 1rem 1.5rem 0 0;
 }
+
+

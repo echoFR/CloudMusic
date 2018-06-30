@@ -42,7 +42,7 @@
             <!-- 歌词 -->
             <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div class="pshow-top-songword" v-show="!showImg">
-                    <div class="songword-box" :style="{transform: 'translate3d(0,'+LyricTop+'rem,0)'}">
+                    <div ref="lyricBox" class="songword-box" :style="{transform: 'translate3d(0,'+LyricTop+'rem,0)'}">
                         <span v-show="isLoadLyric">{{ loadLyric }}</span>
                         <ul ref="lyricUl">
                             <li v-for="(item,index) in this.lyric" :key="index">
@@ -122,7 +122,7 @@ export default{
             },
             percent: 0,
             loadLyric: '加载歌词中....',
-            LyricTop: 0,
+            LyricTop: 20,
             LyricLiHeight: 2
         }
     },
@@ -415,7 +415,6 @@ export default{
             // event.pageX 点击距离左边的距离
             const offsetWidth = event.pageX - rect.left;
             this.setWidth(offsetWidth);
-
             const boxWidth= (this.$refs.progressBox.clientWidth) -(this.$refs.dot.offsetWidth);
             const percent = this.$refs.progressGo.clientWidth / boxWidth;
             this.percentChangeEnd(percent);
@@ -427,14 +426,23 @@ export default{
     },
     watch:{
         currentTime(newV,oldV){
-            for(let i=0;i<this.lyric.length;i++){
-                if(newV>=this.lyric[i][0]){
-                    if(i>=0){
-                        this.LyricTop=-(this.LyricLiHeight*i);
+            this.percent= newV / this.duration;
+            if(!this.touch.initiated){
+                 this.LyricTop= 20;
+                 if(this.lyric.length!=0){
+                    for(let i=0;i<this.lyric.length;i++){
+                        if(newV>=this.lyric[i][0]){
+                            for(var j = 0; j < this.lyric.length; j++){
+                                this.$refs.lyricUl.children[j].style.color='rgba(255,255,255,0.5)';
+                            }
+                            if(i>=0){
+                                this.$refs.lyricUl.children[i].style.color='#fff';
+                                this.LyricTop=-(i*4)+20;
+                            }
+                        }
                     }
                 }
             }
-            this.percent= newV / this.duration;
         },
         // 歌曲播放
         percent(newV,oldV){
