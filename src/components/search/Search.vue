@@ -1,8 +1,8 @@
 <template>
   <div class="search">
-    <SearchBox @keyword='KeywordChange' ref="searchBox"></SearchBox>
+    <SearchBox @watchKeyword='KeywordChange' ref="searchBox"></SearchBox>
     <!-- 一级搜索 -->
-    <OneSearch v-show="keyword"></OneSearch>
+    <OneSearch v-show="keyword" :keyword='keyword'></OneSearch>
     <!-- 热门搜索 -->
     <div class="hot-search" v-show="!keyword">
       <span class="hot-search-title">热门搜索</span>
@@ -12,7 +12,6 @@
         </span>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -50,10 +49,6 @@ import SearchBox from '@/base/search-box/SearchBox'
     },
     mounted(){
       this.getHotList();
-    },
-    watch:{
-      keyword(newKeyword){
-      }
     }
   }
 </script>

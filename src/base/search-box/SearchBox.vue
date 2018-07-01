@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import {debounce} from '@/assets/js/util.js'
 import axios from 'axios'
 export default{
     props:{
@@ -37,9 +38,10 @@ export default{
         }
     },
     created() {
-        this.$watch('keyword',(newKeyword)=>{
-            this.$emit('keyword',newKeyword);
-        })
+        this.$watch('keyword',debounce((newKeyword)=>{
+                this.$emit('watchKeyword',newKeyword);
+            },300)
+        );
     },
 }
 </script>
