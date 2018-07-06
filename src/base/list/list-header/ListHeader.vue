@@ -1,6 +1,6 @@
 <template>
     <div class="songslist-header">
-        <GoBack :songsArr="songsdata.tracks"></GoBack>
+        <GoBack :songsArr="songsdata.tracks" :style="{backgroundColor: '#758383'}"></GoBack>
         <HeaderTop :songsdata="songsdata"></HeaderTop>
         <HeaderBottom :songsdata="songsdata"></HeaderBottom>
     </div>

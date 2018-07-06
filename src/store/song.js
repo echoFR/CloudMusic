@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {localHistory,addHistory} from '@/assets/js/cache.js'
+
 let state={
     // 点击右侧显示更多
     isShowMore: false,
@@ -30,7 +32,8 @@ let state={
     duration: 0,//时长
     currentTime: 0,//当前时长
     designTime: 0,//拖动指定的时间
-    isLoadLyric: true
+    isLoadLyric: true,
+    searchHistory: localHistory(),//搜索记录
 }
 const getters={
     isShowMore:(state)=>{
@@ -77,6 +80,9 @@ const getters={
     },
     isLoadLyric:(state)=>{
         return state.isLoadLyric;
+    },
+    searchHistory:(state)=>{
+        return state.searchHistory
     }
 }
 const mutations={
@@ -175,7 +181,16 @@ const mutations={
     },
     hideLoadLyric(state){
         state.isLoadLyric= false;
+    },
+    setSearchHistory(state,keyWord){
+        let searches=addHistory(keyWord);
+        state.searchHistory=searches;
     }
+}
+function findIndex(list, song) {
+    return list.findIndex((item) => {
+      return item.id === song.id
+    })
 }
 const actions={
     getSongComment:({commit,state},songid)=>{
@@ -211,7 +226,48 @@ const actions={
             console.log(err);
             console.log('获取歌词失败');
         }); 
-    }
+    },
+    insertSong:({commit,state},song)=>{
+        let songList= state.songList.slice();
+        let originList= state.originList.slice();
+        let playerIndex= state.playerIndex;
+        //记录当前歌曲
+        let currentSong= songList[playerIndex];
+
+        // 查找当前播放列表中是否有待插入的歌曲并返回其索引
+        let fpIndex = findIndex(songList, song);
+        playerIndex++;
+        //向当前播放数组添加这个song
+        songList.splice(playerIndex, 0, song);
+        //之前就有这首歌
+        if(fpIndex>-1){
+            //并且插入序号大于之前序号
+            if(playerIndex> fpIndex){
+                songList.splice(fpIndex, 1);//删除之前重复的
+                playerIndex--;
+            }else{
+                songList.splice(fpIndex+1, 1);//删除之前重复的                
+            }
+        }
+
+        let currentSIndex = findIndex(originList, currentSong) + 1;
+        let fsIndex = findIndex(originList, song);
+        originList.splice(currentSIndex, 0, song)
+        if (fsIndex > -1) {
+          if (currentSIndex > fsIndex) {
+            originList.splice(fsIndex, 1)
+          } else {
+            originList.splice(fsIndex + 1, 1)
+          }
+        }
+        localStorage.setItem('songlist',JSON.stringify(songList));
+        localStorage.setItem('originlist',JSON.stringify(originList));        
+        localStorage.setItem('songindex',playerIndex);
+        commit('setSonglist',songList);
+        commit('setOriginList',originList);        
+        commit('setplayerIndex',playerIndex);
+        commit('setPlayerStatus',true);
+    },
 }
 export default{
     state,

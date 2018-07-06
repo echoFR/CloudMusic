@@ -3,14 +3,13 @@
     font-size: 1.5rem;
     margin-bottom: 5rem;
     width: 100%;
-    /* height: 100%; */
-    /* position: fixed;   */
 }
 /* 热门搜索 */
 .hot-search{
     width: 100%;
+    margin-top: 5rem;
 }
-.hot-search-title{
+.hot-search-title,.history-title{
     width: 98%;
     font-size: 1.3rem;
     color: rgb(133, 132, 132);
@@ -29,5 +28,14 @@
     float: left;
     margin: 1rem 1.5rem 0 0;
 }
+.history{
+    width: 100%;
+    margin-top: 2rem;
+}
+.history-title img{
+    width: 2rem;
+    height: 2rem;
+}
+
 
 

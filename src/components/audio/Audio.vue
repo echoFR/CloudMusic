@@ -185,18 +185,11 @@ export default{
           }
       });    
     },
-    playerUrl(newV,oldV){
-      // 获取总时长
-      // let stop = setInterval(() => {
-      //   this.duration = this.$refs.audio.duration
-      //   console.log(this.format(this.duration));
-      //   if (this.duration) {
-      //     clearInterval(stop)
-      //   }
-      // }, 150)
-    },
     designTime(newV,oldV){
       this.$refs.audio.currentTime=newV;
+    },
+    nowSong(newV){
+      this.toPlay();
     }
   },
 }

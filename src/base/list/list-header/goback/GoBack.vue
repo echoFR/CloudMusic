@@ -1,5 +1,5 @@
 <template>
-  <div class="go-back">
+  <div class="go-back" ref="goback" :style="{backgroundImage: 'url(' +  + ')'}">
       <span class="go-back-left" @click="goBack()">
           <img src="@/assets/img/goback.png" align="absbottom">
       </span>

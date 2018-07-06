@@ -2,8 +2,10 @@
     background-color: #d23023;
     height: 3rem;
     padding: 1rem 0;
-    position: relative;
+    position: fixed;
     width: 100%;
+    left: 0;
+    top: 0;
 }
 .search-box-left{
     width: 10%;

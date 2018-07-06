@@ -32,3 +32,11 @@ export function throttle(fn,delay){
         }
     }
 }
+
+export function CheckEmptyStr(string){
+    if (string.replace(/(^\s*)|(\s*$)/g, "").length ==0)
+    {
+        return true;
+    }
+    return false;
+}

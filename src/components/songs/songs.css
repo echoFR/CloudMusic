@@ -76,3 +76,9 @@
       height: auto;
       margin-right: 0.3rem;
   }
+  .over{
+      padding: 1rem 0 2rem 0;
+      color: #d23023;
+      text-align: center;
+      font-size: 1.6rem;
+  }

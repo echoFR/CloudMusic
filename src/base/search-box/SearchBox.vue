@@ -35,14 +35,14 @@ export default{
         },
         setKeyword(newKeyword){
             this.keyword=newKeyword;
-        }
+        },
     },
     created() {
         this.$watch('keyword',debounce((newKeyword)=>{
                 this.$emit('watchKeyword',newKeyword);
             },300)
         );
-    },
+    }
 }
 </script>
 <style>

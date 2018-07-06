@@ -27,7 +27,10 @@
               <p>{{ item.name }}</p>
           </div>  
       </div>
-      <Loading></Loading>
+      <Loading v-show="haveMore"></Loading>
+      <div class="over" v-show="!haveMore">
+          <span> 加载结束^8^ ~~~ </span>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +47,8 @@ export default {
       return{
           songslists:[], 
           id:0,
-          showNum: 6
+          showNum: 6,
+          haveMore: true
       }
   },
   mounted(){
@@ -63,6 +67,10 @@ export default {
       //   获得歌单
         getSongslist(){
             axios.get(HOST+'/top/playlist?&order=hot&limit='+this.showNum).then((res)=>{
+                if(this.showNum>=108){
+                    this.haveMore= false;
+                    return;
+                }
                 this.songslists=res.data.playlists;
             }).catch(function(err){
                 console.log(err);
@@ -73,7 +81,7 @@ export default {
             //  滚动事件触发
             window.onscroll=()=>{
                 if(height.getScrollTop() + height.getClientHeight()+1 >= height.getScrollHeight()) {
-                    this.showNum+=this.showNum;
+                    this.showNum+=8;
                     this.getSongslist();               
                 }
             }
