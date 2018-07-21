@@ -1,17 +1,13 @@
 <template>
-    <div class="ranklist-header" :style="{backgroundImage: 'url(' + songsdata.coverImgUrl + ')'}">
+    <div class="ranklist-header" :style="{backgroundImage: 'url(' + songsdata.coverImgUrl + ')',height: 8+'rem'}">
         <GoBack :songsArr="songsdata.tracks" :style="{backgroundImage: 'url(' + songsdata.coverImgUrl + ')'}"></GoBack>
-        <HeaderBottom :songsdata="songsdata"></HeaderBottom>
     </div>
 </template>
 <script>
-import GoBack from '@/base/list/list-header/goback/GoBack'
-import HeaderTop from '@/base/list/list-header/headertop/HeaderTop'
-import HeaderBottom from '@/base/list/list-header/headerbottom/HeaderBottom'
+import GoBack from '@/base/list/list-header/GoBack'
     export default{
         components:{
             GoBack,
-            HeaderBottom
         },
         props:['songsdata'],
     }

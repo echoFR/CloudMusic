@@ -3,7 +3,7 @@
         <!-- 歌手 -->
         <span class="title" v-show="suggest.artists">歌手</span>
         <ul class="one-search-singer">
-            <li v-for="(item ,index) in suggest.artists" :key="index" @click="select(item)">
+            <li v-for="(item ,index) in suggest.artists" :key="index" @click="select(item),toSinger(item)">
                 <div class="one-search-singer-left">
                     <img :src="item.picUrl">
                 </div>
@@ -149,6 +149,12 @@ export default{
             }).catch((err)=>{
                 console.log(err);
             })
+        },
+        toSinger(item){
+            this.$router.push({path: '/singers-rank/list/'+item.id,query:{
+                picUrl: item.picUrl,
+                name: item.name
+            }});
         },
         select(item){
             this.$emit('select',item);

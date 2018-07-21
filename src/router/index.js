@@ -7,6 +7,8 @@ import Search from '@/components/search/Search'
 import List from '@/base/list/List'
 import Player from '@/components/player/Player'
 import Info from '@/components/info/Info'
+import singersRank from '@/base/singers-rank/singersRank'
+import RankList from '@/base/singers-rank/List'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -49,6 +51,14 @@ export default new Router({
       component: Info,
       name: 'info'
     },
+    {
+      path: '/singers-rank',
+      component: singersRank,
+    },
+    {
+      path: '/singers-rank/list/:id',
+      component: RankList,
+    }
   ],
   mode:'history',
   scrollBehavior: () => ({ y: 0 }), // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置

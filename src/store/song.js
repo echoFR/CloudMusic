@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {localHistory,addHistory} from '@/assets/js/cache.js'
+import {localHistory,addHistory,deleteSearch} from '@/assets/js/cache.js'
 
 let state={
     // 点击右侧显示更多
@@ -27,6 +27,8 @@ let state={
     playMode: 1,
     playerUrl: null,
     lyric: [], //歌词
+    noLyricText:'暂无歌词',
+    noLyric: false,
     parsedLyric:[],//解析后的歌词
     songReady: false,//歌曲ready
     duration: 0,//时长
@@ -83,6 +85,12 @@ const getters={
     },
     searchHistory:(state)=>{
         return state.searchHistory
+    },
+    noLyric:(state)=>{
+        return state.noLyric;
+    },
+    noLyricText:(state)=>{
+        return state.noLyricText;
     }
 }
 const mutations={
@@ -179,11 +187,25 @@ const mutations={
         });
         state.lyric=result;
     },
+    setNoLyric(state,text){
+        state.noLyricText=text;
+    },
+    changeNoLyric(state,falg){
+        state.noLyric= falg;
+    },
     hideLoadLyric(state){
         state.isLoadLyric= false;
     },
     setSearchHistory(state,keyWord){
         let searches=addHistory(keyWord);
+        state.searchHistory=searches;
+    },
+    clearHistory(state){
+        localStorage.removeItem('history');
+        state.searchHistory=[];
+    },
+    delectHistory(state,item){
+        let searches=deleteSearch(item);
         state.searchHistory=searches;
     }
 }
@@ -206,6 +228,8 @@ const actions={
                 });
             }).catch((err)=>{
                 console.log(err);
+                console.log('获取评论失败');
+                
         });
     },
     getSongUrl:({commit,state},songid)=>{
@@ -214,14 +238,23 @@ const actions={
                 commit('setplayerUrl',res.data.data[0].url);
             }).catch((err)=>{
                 console.log(err);
-                console.log('请求失败');
+                console.log('获取歌曲url失败');
         }); 
     },
     getLyric:({commit,state},songid)=>{
         axios.get('http://localhost:3000/lyric?id='+songid).then((res)=>{
-            let text =res.data.lrc.lyric;
-            commit('setLyric',text);
-            commit('hideLoadLyric');
+            if(res.data.nolyric==true){
+                commit('changeNoLyric',true);                
+                commit('setNoLyric','纯音乐，请欣赏');
+            }else if(res.data.uncollected==true){
+                commit('changeNoLyric',true);                
+                commit('setNoLyric','暂无歌词');
+            }else{
+                commit('changeNoLyric',false);                
+               let text =res.data.lrc.lyric;
+               commit('setLyric',text);               
+            }
+            commit('hideLoadLyric'); 
         }).catch((err)=>{
             console.log(err);
             console.log('获取歌词失败');

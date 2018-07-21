@@ -38,3 +38,23 @@ export function addHistory(keyWord){
     localStorage.setItem(strKey,JSON.stringify(searches));
     return searches;
 }
+
+function deleteFromArray (arr, compare) {
+  const index = arr.findIndex(compare)
+  if (index > -1) {
+    arr.splice(index, 1)
+  }
+}
+export function deleteSearch (keyWord) {
+  let strKey='history';
+  let searches=[];
+  if(localStorage.getItem(strKey)==null){
+    localStorage.setItem(strKey,JSON.stringify([]));
+  }
+  searches=JSON.parse(localStorage.getItem(strKey));
+  deleteFromArray(searches, (item) => {
+    return item === keyWord;
+  })
+  localStorage.setItem(strKey,JSON.stringify(searches));
+  return searches;
+}

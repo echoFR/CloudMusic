@@ -1,7 +1,7 @@
 <template>
     <div class="play-all-header">
         <span class="play-all-left">
-            <img src="../../../assets/img/play.png" align="absmiddle">
+            <img src="@/assets/img/play.png" align="absmiddle">
             播放全部（共{{songsdata.number}}首）
         </span>
         <span class="play-all-right">收藏（{{songsdata.subscribedCount}}人）</span>

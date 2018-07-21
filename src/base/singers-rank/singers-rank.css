@@ -1,0 +1,37 @@
+.rank-list{
+    width: 100%;
+    margin-top: 1rem;
+}
+.rank-list-ul{
+    width: 100%;
+}
+.rank-list-ul li{
+    width: 100%;
+    position: relative;
+    height: 7rem;
+}
+.rank-num{
+    position: absolute;
+    width: 20%;
+    text-align: center;
+    height: 7rem;
+    line-height: 7rem;
+    display: block;
+    font-size: 1.8rem;
+}
+.rank-li-img{
+    float: left;
+    margin-left: 20%;
+}
+.rank-li-img img{
+    width: 6rem;
+    height: 6rem;
+}
+.rank-li-text{
+    float: left;
+    margin-left: 1rem;
+}
+.rank-li-text span{
+    display: block;
+    padding: 0.5rem;
+}

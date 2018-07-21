@@ -22,11 +22,17 @@ import Loading from '@/base/loading/Loading'
 import axios from 'axios'
 import {mapMutations,mapGetters} from 'vuex'
 export default{
-    props: ['songsdata'],//歌单信息
+    props: {
+        songsdata:{
+            type: Object,
+            default:{},
+        }
+    },
     computed:{
         ...mapGetters([
             'originList',
-            'isShowLoading'
+            'isShowLoading',
+            'song'
         ])
     },
     methods:{
@@ -59,9 +65,8 @@ export default{
     },
     components:{
         Loading
-    }
+    },
 }
-
 </script>
 <style>
 @import './list.css';

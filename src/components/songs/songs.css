@@ -5,37 +5,6 @@
   /*  歌单列表*/
   .songs-list{
       padding-bottom: 5rem;
-      padding-top: 1.5rem;
-  }
-  .songs-list-header{
-      width: 100%;
-      margin: 1rem 0;
-      position: relative;
-      font-size: 1.3rem;
-  }
-  .songs-list-select{
-      margin-left: 1rem;
-      border: 0.1rem solid #DCDCDC;
-      padding: 0.4rem 0.9rem;
-      border-radius: 1rem;
-  }
-  .songs-list-select img{
-      width: 1.5rem;
-      height: 1.5rem;
-      margin-top: -0.5rem;
-      vertical-align: middle;
-  }
-  .songs-list-tag{
-      overflow: hidden;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      height: 2rem;
-      line-height: 2rem;
-  }
-  .songs-list-tag li{
-      float: left;
-      margin-right: 1rem;
   }
   /* 歌单 */
   .songs-list-container{
@@ -48,8 +17,7 @@
   .songs-list-left{
       width: 48%;
       float: left;
-      margin: 0 2% 0 0;
-      height: 22rem;
+      margin: 0 2% 1rem 0;
   }
   .songs-list-img{
       position: relative;

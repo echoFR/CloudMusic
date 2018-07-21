@@ -1,17 +1,6 @@
 <template>
   <div class="songs">
     <div class="songs-list">
-      <div class="songs-list-header">
-          <span class="songs-list-select">
-              全部歌单
-              <img src="@/assets/img/goringht.png" class="go-ringht">
-          </span>
-          <ul class="songs-list-tag">
-              <li>华语</li>
-              <li>民谣</li>
-              <li>乡村</li>
-          </ul>
-      </div>
       <!-- 歌单列表 -->
       <div class="songs-list-container">
           <div class="songs-list-left"  v-for="(item,index) in songslists" :key="index" @click="goSongslist(item)">                        

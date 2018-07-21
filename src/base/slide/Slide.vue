@@ -1,23 +1,8 @@
 <template>
     <div class="swiper">
             <swiper :options="swiperOption">
-                <swiper-slide>
-                    <img src="@/assets/img/songs.jpg">
-                </swiper-slide>
-                <swiper-slide>
-                    <img src="@/assets/img/songsbg.jpg">
-                </swiper-slide>
-                <swiper-slide>
-                    <img src="@/assets/img/song2.png">
-                </swiper-slide>
-                <swiper-slide>
-                    <img src="@/assets/img/songsbg.jpg">
-                </swiper-slide>
-                <swiper-slide>
-                    <img src="@/assets/img/song2.png">
-                </swiper-slide>
-                <swiper-slide>
-                    <img src="@/assets/img/songsbg.jpg">
+                <swiper-slide v-for="(item,index) in banners" :key="index">
+                    <img :src="item.picUrl">
                 </swiper-slide>
                 <!-- 小圆点 -->
                 <div class="swiper-pagination"  slot="pagination"></div>
@@ -25,6 +10,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default{
     data(){
@@ -39,15 +25,23 @@ export default{
                 pagination: {// 分页器 下面的小圆点
                     el: '.swiper-pagination',
                 },
-                loop: true, // 播放速度
+                loop: true, 
                 speed: 1000,
             },
+            banners:[],
         }
     },
     components:{
         swiper,
         swiperSlide
-    }
+    },
+    mounted(){
+        axios.get('http://localhost:3000/banner').then((res)=>{
+            this.banners=res.data.banners;
+        }).catch((err)=>{
+            console.log(err);
+        })
+    },
 }    
 </script>
 <style>
@@ -56,11 +50,11 @@ export default{
 }
 .swiper-container {
     width: 100%;
-    height: 17rem;
+    height: 15rem;
 }  
 .swiper-slide{
     width: 100%;
-    height: 17rem;
+    height: 15rem;
     text-align: center;
 }
 .swiper-slide img{

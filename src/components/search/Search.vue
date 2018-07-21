@@ -1,9 +1,7 @@
 <template>
   <div class="search">
     <SearchBox @watchKeyword='KeywordChange' ref="searchBox"></SearchBox>
-    <!-- 一级搜索 -->
     <OneSearch v-show="upkeyword" :keyword='keyword' ref="oneSearch" @select='addHistory'></OneSearch>
-    <!-- 热门搜索 -->
     <div class="hot-search" v-show="!upkeyword">
       <span class="hot-search-title">热门搜索</span>
       <div class="hot-search-tip">
@@ -12,29 +10,24 @@
         </span>
       </div>
     </div>
-    <!-- 历史记录 -->
-    <div class="history" v-show="!upkeyword && searchHistory.length">
+    <div class="history" v-if="!upkeyword && !(searchHistory==undefined) && searchHistory.length">
       <div class="history-title">
         <span>历史记录</span>
-        <img src="@/assets/img/remove.png" @click="clearHistory">
+        <img src="@/assets/img/remove.png" @click="displayConfirm">
       </div>
       <SearchList :list='searchHistory' @delect='delectHistory' @select="changeSearch"></SearchList>
     </div>
-    <!-- <div class="mask"> -->
-      <!-- <div class="confirm">
-
-      </div> -->
-    <!-- </div> -->
+    <Confirm :showConfirm='showConfirm' :text='text' @noSelect="hideConfirm" @select='clear'></Confirm>
   </div>
 </template>
 
 <script>
-
 import {debounce} from '@/assets/js/util.js'
 import height from '@/assets/js/height.js'
 import axios from 'axios'
 import OneSearch from '@/components/search/one-search/OneSearch'
 import SearchList from '@/base/search-list/SearchList'
+import Confirm from '@/base/confirm/Confirm'
 import {CheckEmptyStr} from '@/assets/js/util.js'
 import SearchBox from '@/base/search-box/SearchBox'
 import {mapGetters,mapMutations} from 'vuex'
@@ -43,11 +36,14 @@ import {mapGetters,mapMutations} from 'vuex'
       SearchBox,
       OneSearch,
       SearchList,
+      Confirm,
     },
     data(){
       return{
         HotList:[],
         keyword:'',
+        showConfirm: false,
+        text:'确定将所有历史记录清空吗？'
       }
     },
     computed:{
@@ -60,7 +56,9 @@ import {mapGetters,mapMutations} from 'vuex'
     },
     methods:{
       ...mapMutations([
-        'setSearchHistory'
+        'setSearchHistory',
+        'clearHistory',
+        'delectHistory'
       ]),
       getHotList(){
         axios.get('http://localhost:3000/search/hot').then((res)=>{
@@ -86,16 +84,20 @@ import {mapGetters,mapMutations} from 'vuex'
       addHistory(item){
         this.setSearchHistory(item.name);
       },
-      delectHistory(item){
-        console.log('从历史记录里面删除');
+      displayConfirm(){
+        this.showConfirm=true;
       },
-      clearHistory(){
-        console.log('清除历史记录');
+      hideConfirm(){
+        this.showConfirm=false;        
+      },
+      clear(){
+        this.clearHistory();
+        this.showConfirm=false;                
       }
     },
     mounted(){
       this.getHotList();
-      this.Scroll();   
+      this.Scroll();
     }
   }
 </script>

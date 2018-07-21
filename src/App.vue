@@ -2,7 +2,7 @@
   <div class="app" ref="appbox">
     <MyAudio></MyAudio>
     <Header v-show="isShowHeader"></Header>
-    <keep-alive exclude="list,player">
+    <keep-alive exclude="list,player,singers,singer-list">
       <router-view></router-view>
     </keep-alive>
   </div>

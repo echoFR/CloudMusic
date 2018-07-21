@@ -5,60 +5,53 @@
     height: 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    font-size: 1.6rem;
+    font-size: 16px;
     color: #eee;
-    padding-top: 6.4rem;
+    padding-top: 64px;
 }
 .pheader{
     width: 100%;
-    padding: 1rem 0;
+    padding: 10px 0;
     position: fixed;
     z-index: 100;
-    height: 4.4rem;
+    height: 44px;
     top: 0;
     left: 0;
 }
 .pheader span img{
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 26px;
+    height: 26px;
 }
 .pheader-song{
     display: inline-block;
     width: 100%;
     position: relative;
-    height: 4rem;
+    height: 40px;
 }
 .pheader-title{
     display: block;
-    position: absolute;
-    margin: 0 4.2rem;
-    height: 2.3rem;
-    left: 0;
-    top: 0;
+    margin: 0 42px;
     overflow: hidden;
     color: white;
 }
 .pheader-singer{
-    position: absolute;
-    top: 2.3rem;
-    left: 0;
-    margin-left: 4.2rem;
+    margin-left: 42px;
     color: #fff;
 }
 .pheader-goback,.pheader-share{
     position: absolute;
-    top: 1.5rem;
+    top: 15px;
     z-index: 1;
 }
 .pheader-goback{
     left: 0;
-    margin-left: 1rem;
+    margin-left: 10px;
 }
 .pheader-share{
-    right: 1rem;
+    right: 10px;
 }
 .pheader-singer{
-    font-size: 1.3rem;
+    font-size: 13px;
 }
 
 .pshow{
@@ -73,7 +66,11 @@
     overflow: hidden;
     /* 隐藏歌词 */
 }
-
+.nolyric{
+    width: 100%;
+    text-align: center;
+    margin-top: 50%;
+}
 
 /*播放show*/
 .pshow-top-song{
@@ -86,7 +83,7 @@
     position: relative;
     width: 70%;
     height: 0;
-    border: 1rem solid rgba(255,255,255,0.2);    
+    border: 10px solid rgba(255,255,255,0.2);    
     padding-bottom: 70%;
     border-radius: 50%;
     margin: 0 auto;
@@ -101,7 +98,7 @@
 .pshow-top-songimg img{
     width: 75%;
     height: auto;
-    max-height: 25rem;
+    max-height: 250px;
     margin-top: 15%;
     border-radius: 50%; 
 }
@@ -114,8 +111,8 @@
     background: url('../../assets/img/playborder.png') no-repeat;
     background-position:-5px -7px;
     background-size: 102%;
-    top: -0.3rem;
-    left: -0.3rem;
+    top: -3px;
+    left: -3px;
 }
 .pshow-top-songtag{
     width: 92%;
@@ -130,14 +127,14 @@
     width: 23%;
 }
 .pshow-top-songtag span img{
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 28px;
+    height: 28px;
 }
 .commentCount{
     position: relative;
-    font-size: 1rem;
-    top: -2rem;
-    left: -0.3rem;
+    font-size: 10px;
+    top: -20px;
+    left: -3px;
 }
 .pshow-top-songword{
     width: 100%;
@@ -155,7 +152,7 @@
     width: 100%;
 }
 .songword-box ul li{
-    padding: 1rem 0;
+    padding: 10px 0;
 }
 .play-bottom{
     width: 100%;
@@ -163,16 +160,16 @@
 .play-bottom-progress{
     width: 94%;
     position: relative;
-    padding: 1rem 3%;
+    padding: 10px 3%;
 }
 .progress-current,.progress-total{
     position: absolute;
     top: 0;
-    font-size: 1.2rem;
+    font-size: 12px;
     width: 10%;
     text-align: center;
-    height: 2.3rem;
-    line-height: 2.3rem;
+    height: 23px;
+    line-height: 23px;
 }
 .progress-current{
     left: 1.5%;
@@ -181,10 +178,10 @@
     right: 1.5%;
 }
 .progress-box{
-    border-radius: 0.4rem;
+    border-radius: 4px;
     width: 80%;
     margin: 0 auto;
-    height: 0.5rem;
+    height: 5px;
     position: relative;
     background-color: rgba(0,0,0,.3);
 }
@@ -194,20 +191,20 @@
     background-color: #f31c0c;
 }
 .progress-box-dot{
-    width: 3rem;
-    height: 3rem;
+    width: 30px;
+    height: 30px;
     position: absolute;
-    top: -1.5rem;
+    top: -15px;
     left: 0;
 }
 .dot{
     position: relative;
-    top: 0.9rem;
+    top: 9px;
     left: 0;
     box-sizing: border-box;
-    width: 1.6rem;
-    height: 1.6rem;
-    border: 0.5rem solid #f1f1f1;
+    width: 16px;
+    height: 16px;
+    border: 5px solid #f1f1f1;
     border-radius: 50%;
     background: #d44439;
 }
@@ -215,7 +212,7 @@
 .play-bottom-tabBox{
     width: 90%;
     margin: 0 auto;
-    margin-top: 1.3rem;
+    margin-top: 13px;
 }
 .play-bottom-tab{
     width: 100%;
@@ -227,15 +224,15 @@
     text-align: center;
 }
 .play-bottom-tab div img{
-    width: 3.1rem;
-    height: 3.1rem;
+    width: 31px;
+    height: 31px;
 }
 .play-bottom-tab .playing img{
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 45px;
+    height: 45px;
     position: relative;
     left: 0;
-    top: -0.3rem;
+    top: -3px;
 }
 
 
@@ -258,11 +255,11 @@
     background-position: center top;
     background-size: cover;
     background-attachment: fixed;
-    -webkit-filter: blur(2rem);
-    -moz-filter: blur(2rem);
-    -ms-filter: blur(2rem);
-    -o-filter: blur(2rem);
-    filter: blur(2rem);
+    -webkit-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -ms-filter: blur(20px);
+    -o-filter: blur(20px);
+    filter: blur(20px);
 }
 .player-maskbg2{
     width: 100%;

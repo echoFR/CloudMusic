@@ -21,6 +21,7 @@
 }
 .speedup-left,.speedup-right{
     float: left;
+    width: 50%;
 }
 .speedup-left{
     position: relative;
@@ -43,10 +44,13 @@
     width: 100%;
 }
 .speedup-right-ul li{
-    width: 100%;
+    width: 92%;
     height: 4rem;
     line-height: 4rem;
     font-size: 1.3rem;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .rank-global,.rank-global-box{
     width: 100%;

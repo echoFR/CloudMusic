@@ -18,7 +18,7 @@
         <div class="pshow-top" @click="swapShow()">
             <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div class="pshow-top-song" v-show="showImg">
-                    <div class="pshow-top-songimg" :style='{"animation": (playerStatus?" 25s linear 0s normal none infinite rotate":"none")}'>
+                    <div ref="player" class="pshow-top-songimg">
                         <img :src="currentSong.picUrl">
                         <div class="pshow-top-border"></div>
                     </div>
@@ -42,13 +42,16 @@
             <!-- 歌词 -->
             <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div class="pshow-top-songword" v-show="!showImg">
-                    <div ref="lyricBox" class="songword-box" :style="{transform: 'translate3d(0,'+LyricTop+'rem,0)'}">
+                    <div ref="lyricBox" class="songword-box" :style="{transform: 'translate3d(0,'+LyricTop+',0)'}" v-show="!noLyric">
                         <span v-show="isLoadLyric">{{ loadLyric }}</span>
                         <ul ref="lyricUl">
                             <li v-for="(item,index) in this.lyric" :key="index">
                                 {{item[1]}}
                             </li> 
                         </ul>
+                    </div>
+                    <div v-show="noLyric" class="nolyric">
+                        {{ noLyricText }}
                     </div>
                 </div>
             </transition>
@@ -70,7 +73,6 @@
             <!-- 播放按钮 -->
             <div class="play-bottom-tabBox">
                 <div class="play-bottom-tab">
-                    <!-- 播放模式 -->
                     <div class="tab-order" @click="changePlayMode()">
                         <img :src="playerModeBtn">
                     </div>
@@ -122,8 +124,7 @@ export default{
             },
             percent: 0,
             loadLyric: '加载歌词中....',
-            LyricTop: 20,
-            LyricLiHeight: 2
+            LyricTop: 200+'px',
         }
     },
     components:{
@@ -145,7 +146,9 @@ export default{
             'currentTime',
             'designTime',//拖动指定时间
             'lyric',
-            'isLoadLyric'
+            'isLoadLyric',
+            'noLyricText',
+            'noLyric'
         ]),
         upsongList(){
             //刷新后 歌单没有数据
@@ -332,10 +335,14 @@ export default{
         // 播放暂停
         Playing(){
             if(this.playerStatus == true){  
-                this.setPlayerStatus(false);            
+                this.setPlayerStatus(false);
+                this.$refs.player.style.animationPlayState = 'paused';
+                this.$refs.player.style.webkitAnimationPlayState = 'paused';                                        
             }
             else{    
-                this.setPlayerStatus(true);                          
+                this.setPlayerStatus(true);  
+                this.$refs.player.style.animationPlayState = 'running';            
+                this.$refs.player.style.webkitAnimationPlayState = 'running';            
             }              
         },
         format(interval) {
@@ -406,8 +413,8 @@ export default{
         },
         // 设置进度条走过的width和按钮的偏移
         setWidth(offsetWidth){
-            this.$refs.progressGo.style.width= `${offsetWidth/10}rem`;
-            this.$refs.progressDot.style["transform"] = `translate3d(${offsetWidth/10}rem, 0, 0)`;
+            this.$refs.progressGo.style.width= `${offsetWidth}px`;
+            this.$refs.progressDot.style["transform"] = `translate3d(${offsetWidth}px, 0, 0)`;
         },
         clickProgress(event){
             // rect.left 元素距离左边的距离
@@ -428,7 +435,6 @@ export default{
         currentTime(newV,oldV){
             this.percent= newV / this.duration;
             if(!this.touch.initiated){
-                 this.LyricTop= 20;
                  if(this.lyric.length!=0){
                     for(let i=0;i<this.lyric.length;i++){
                         if(newV>=this.lyric[i][0]){
@@ -437,7 +443,7 @@ export default{
                             }
                             if(i>=0){
                                 this.$refs.lyricUl.children[i].style.color='#fff';
-                                this.LyricTop=-(i*4)+20;
+                                this.LyricTop=-i*40 + 200+'px';
                             }
                         }
                     }
@@ -466,5 +472,15 @@ export default{
 </script>
 
 <style>
-@import './player.css'
+@import './player.css';
+@keyframes circle
+{
+    0% {transform:rotate(0deg);}
+    50% {transform:rotate(180deg);}
+    100% {transform:rotate(360deg);}
+}
+.pshow-top-songimg{
+    animation: circle 20s linear infinite;
+    -webkit-animation: circle 20s linear infinite;
+}
 </style>

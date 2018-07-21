@@ -210,37 +210,46 @@ export default{
 }
 .mini-left{
   float: left;
-  overflow: hidden;
+  width: 70%;
 }
 .mini-left img{
-  width: 5rem;
-  height: 5rem;
+  width: 22%;
+  height: auto;
   float: left;
-  margin-right: 0.5rem;
+  margin-right: 2%;
 }
 .mini-left-text{
   float: left;
   height: 5rem;
+  width: 76%;
+  overflow: hidden;
 }
 .mini-left-text span{
+  width: 100%;
   display: block;
   height: 2.5rem;
   line-height: 2.5rem;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .text-name{
-  width: 20rem;
+  width: 100%;
   overflow: hidden;
 }
 .text-singer{
   font-size: 1.2rem;
 }
 .mini-right img{
-  width: 3.2rem;
-  height: 3.2rem;
-  margin: 0.9rem 1rem 0.9rem 0;
+  width: 35%;
+  height: auto;
+  margin: 0.9rem 10% 0.9rem 0;
+  float: left;
 }
 .mini-right{
   float: right;
+  width: 30%;
+  overflow: hidden;
 }
 </style>
 
