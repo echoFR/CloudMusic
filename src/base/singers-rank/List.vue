@@ -38,7 +38,7 @@ import { mapGetters } from 'vuex';
                 this.picUrl= this.$route.query.picUrl;
                 this.id= this.$route.params.id;
                 this.name= this.$route.query.name;
-                axios.get('http://localhost:3000/artists?id='+this.id).then((res)=>{
+                axios.get('/api/artists?id='+this.id).then((res)=>{
                     this.hotSongs.tracks=res.data.hotSongs;
                 }).catch((err)=>{
                     console.log(err);

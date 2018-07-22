@@ -1,14 +1,52 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Recommend from '@/components/recommend/Recommend'
-import Songs from '@/components/songs/Songs'
-import Rank from '@/components/rank/Rank'
-import Search from '@/components/search/Search'
-import List from '@/base/list/List'
-import Player from '@/components/player/Player'
-import Info from '@/components/info/Info'
-import singersRank from '@/base/singers-rank/singersRank'
-import RankList from '@/base/singers-rank/List'
+// import RankList from '@/base/singers-rank/List'
+
+const Recommend= (resolve)=>{
+  import('@/components/recommend/Recommend').then((module)=>{
+    resolve(module)
+  })
+}
+const Songs= (resolve)=>{
+  import('@/components/songs/Songs').then((module)=>{
+    resolve(module)
+  })
+}
+const Rank= (resolve)=>{
+  import('@/components/rank/Rank').then((module)=>{
+    resolve(module)
+  })
+}
+const Search= (resolve)=>{
+  import('@/components/search/Search').then((module)=>{
+    resolve(module)
+  })
+}
+const List= (resolve)=>{
+  import('@/base/list/List').then((module)=>{
+    resolve(module)
+  })
+}
+const Player= (resolve)=>{
+  import('@/components/player/Player').then((module)=>{
+    resolve(module)
+  })
+}
+const Info= (resolve)=>{
+  import('@/components/info/Info').then((module)=>{
+    resolve(module)
+  })
+}
+const singersRank= (resolve)=>{
+  import('@/base/singers-rank/singersRank').then((module)=>{
+    resolve(module)
+  })
+}
+const RankList= (resolve)=>{
+  import('@/base/singers-rank/List').then((module)=>{
+    resolve(module)
+  })
+}
 Vue.use(Router)
 export default new Router({
   routes: [

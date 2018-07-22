@@ -19,7 +19,6 @@
 </template>
 <script>
 import Loading from '@/base/loading/Loading'
-import axios from 'axios'
 import {mapMutations,mapGetters} from 'vuex'
 export default{
     props: {

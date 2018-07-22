@@ -2,9 +2,7 @@ import Vue from 'vue'
 import App from './App'
 // reset css
 import './assets/css/common.css';
-
 import axios from 'axios'
-
 import router from './router/index'
 // vuex
 import store from '@/store/index'
@@ -12,9 +10,12 @@ import store from '@/store/index'
 import animate from 'animate.css'
 Vue.use(animate);
 
+//处理移动端click事件300毫秒延迟
+// import fastclick from 'fastclick'
+// fastclick.attach(document.body);
+
 Vue.config.productionTip = false
 // Swiper
-
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 import 'swiper/dist/css/swiper.css'
@@ -23,7 +24,6 @@ import VueLazyLoad from 'vue-lazyload'
 Vue.use(VueLazyLoad,{
   error: require('./assets/img/music.jpg'),
   loading: require('./assets/img/music1.jpg'),
-  attempt: 5
 });
 
 

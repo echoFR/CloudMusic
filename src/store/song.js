@@ -191,7 +191,7 @@ const mutations={
         state.noLyricText=text;
     },
     changeNoLyric(state,falg){
-        state.noLyric= falg;
+        state.nolyric=falg;
     },
     hideLoadLyric(state){
         state.isLoadLyric= false;
@@ -228,8 +228,6 @@ const actions={
                 });
             }).catch((err)=>{
                 console.log(err);
-                console.log('获取评论失败');
-                
         });
     },
     getSongUrl:({commit,state},songid)=>{
@@ -238,7 +236,7 @@ const actions={
                 commit('setplayerUrl',res.data.data[0].url);
             }).catch((err)=>{
                 console.log(err);
-                console.log('获取歌曲url失败');
+                console.log('请求失败');
         }); 
     },
     getLyric:({commit,state},songid)=>{
@@ -258,6 +256,8 @@ const actions={
         }).catch((err)=>{
             console.log(err);
             console.log('获取歌词失败');
+            commit('changeNoLyric',true);                
+            commit('setNoLyric','暂无歌词');
         }); 
     },
     insertSong:({commit,state},song)=>{

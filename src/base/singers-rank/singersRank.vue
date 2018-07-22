@@ -48,7 +48,7 @@ export default{
     },
     mounted() {
         if(this.$route.query.act=='singers-rank'){
-            axios.get('http://localhost:3000/toplist/artist').then((res)=>{
+            axios.get('/api/toplist/artist').then((res)=>{
                 this.singers=res.data.list.artists;
             }).catch((err)=>{
                 console.log(err);
@@ -57,7 +57,7 @@ export default{
         else{
             this.title=this.$route.query.title;
             let cat= this.$route.query.cat;
-            axios.get(`http://localhost:3000/artist/list?cat=${cat}`).then((res)=>{
+            axios.get(`/api/artist/list?cat=${cat}`).then((res)=>{
                 this.singers=res.data.artists;
             }).catch((err)=>{
                 console.log(err);

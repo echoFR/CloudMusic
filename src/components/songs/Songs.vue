@@ -13,7 +13,7 @@
                       <img src="@/assets/img/owner.png" align="absmiddle"><span>{{ item.creator.nickname }}</span>
                   </span>
               </div>
-              <p>{{ item.name }}</p>
+              <p class="song-name">{{ item.name }}</p>
           </div>  
       </div>
       <Loading v-show="haveMore"></Loading>
@@ -24,7 +24,6 @@
   </div>
 </template>
 <script>
-import {HOST} from '@/assets/js/config.js'
 import axios from 'axios'
 import Loading from '@/base/loading/Loading'
 import height from '@/assets/js/height'
@@ -55,7 +54,7 @@ export default {
         },
       //   获得歌单
         getSongslist(){
-            axios.get(HOST+'/top/playlist?&order=hot&limit='+this.showNum).then((res)=>{
+            axios.get('/api/top/playlist?&order=hot&limit='+this.showNum).then((res)=>{
                 if(this.showNum>=108){
                     this.haveMore= false;
                     return;

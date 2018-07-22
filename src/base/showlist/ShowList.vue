@@ -1,7 +1,7 @@
 <template>
     <transition name="showlist" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
         <div class="mask" @click="hideList">
-            <div class="show-list" id="showListMore" @click="stopBubble">
+            <div class="show-list" id="showListMore" @click.stop>
                 <div class="list-top">
                     <div class="list-top-title">
                         <span class="songs-name">{{playModeWord}}（{{originList.length}}）</span>
@@ -31,7 +31,6 @@
     </transition>
 </template>
 <script>
-import stopBubble from '@/assets/js/stopBubble'
 import {mapGetters,mapActions, mapMutations} from 'vuex'
 import {ModeConfig} from '@/assets/js/config.js'
 export default{
@@ -76,10 +75,6 @@ export default{
             'getSongUrl',
             'getLyric'
         ]),
-        // 防止冒泡
-        stopBubble(){
-            stopBubble();
-        },
         toPlay(index){
             let toPlaySong= this.originList[index];
             let toIndex= this.songList.findIndex((item)=>{

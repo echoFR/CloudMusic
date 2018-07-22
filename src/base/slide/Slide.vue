@@ -36,7 +36,7 @@ export default{
         swiperSlide
     },
     mounted(){
-        axios.get('http://localhost:3000/banner').then((res)=>{
+        axios.get('/api/banner').then((res)=>{
             this.banners=res.data.banners;
         }).catch((err)=>{
             console.log(err);

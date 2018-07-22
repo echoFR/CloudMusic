@@ -8,7 +8,6 @@
   </div>
 </template>
 <script>
-import {HOST} from '@/assets/js/config.js'
 import LHeader from '@/base/list/list-header/ListHeader'
 import RHeader from '@/base/list/list-header/RankHeader'
 import LTag from '@/base/list/list-tag/LTag'
@@ -56,7 +55,7 @@ export default{
     methods: {
         // 获得歌单详细信息
         getSongsDetail(songsid){
-            axios.get(HOST+'/playlist/detail',{
+            axios.get('/api/playlist/detail',{
                     params: {
                         id: songsid
                     }
@@ -77,7 +76,7 @@ export default{
         },
         // 获取歌单评论
         getSongsComment(songsid){
-            axios.get(HOST+'/comment/playlist',{
+            axios.get('/api/comment/playlist',{
                     params: {
                         id: songsid
                     }

@@ -11,7 +11,6 @@
 </template>
 <script>
 import {debounce} from '@/assets/js/util.js'
-import axios from 'axios'
 export default{
     props:{
         placeholder:{

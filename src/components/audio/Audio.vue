@@ -1,7 +1,7 @@
 <template>
   <div class="audio">
     <!-- autoplay loop -->
-      <audio :src="playerUrl" ref="audio" @ended='playEnd' @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
+      <audio :src="playerUrl" ref="audio" @ended='playEnd' @play="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
 
       <!-- mini Player -->
       <div class="mini" v-show="miniPlay" @click="toPlayer()">

@@ -232,7 +232,7 @@ export default{
   },
   methods:{
     getRankList(){
-      axios.get('http://localhost:3000/toplist').then((res)=>{
+      axios.get('/api/toplist').then((res)=>{
         // 官方
         this.getRankShow(this.speedup,res.data.list[0]);
         this.getRankShow(this.newsong,res.data.list[1]);
@@ -285,7 +285,7 @@ export default{
         return filteredSong;
     },
     getThreeSong(obj,id){
-      axios.get('http://localhost:3000/playlist/detail',{
+      axios.get('/api/playlist/detail',{
         params: {
           id: id
         }

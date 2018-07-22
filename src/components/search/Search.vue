@@ -61,7 +61,7 @@ import {mapGetters,mapMutations} from 'vuex'
         'delectHistory'
       ]),
       getHotList(){
-        axios.get('http://localhost:3000/search/hot').then((res)=>{
+        axios.get('/api/search/hot').then((res)=>{
           this.HotList= res.data.result.hots;
         }).catch((err)=>{
           console.log(err);

@@ -1,7 +1,7 @@
 <template>
     <transition name="showmore" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
         <div class="mask" @click="hideMore()">
-            <div class="show-listmore" id="showListMore" @click="stopBubble">
+            <div class="show-listmore" id="showListMore" @click.stop>
                 <div class="list-more-top">
                     <div class="list-more-top-title">
                         <span class="songs-name">歌曲：{{song.name}}</span>
@@ -25,18 +25,12 @@
     </transition>
 </template>
 <script>
-import stopBubble from '@/assets/js/stopBubble'
-import {mapGetters,mapActions} from 'vuex'
 export default{
     methods:{
         // 隐藏遮罩
         hideMore(){  
             this.$store.commit('hideMore');
         },
-        // 防止冒泡
-        stopBubble(){
-            stopBubble();
-        }
     },
     computed:{
         ...mapGetters([
