@@ -25,6 +25,7 @@
     </transition>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default{
     methods:{
         // 隐藏遮罩

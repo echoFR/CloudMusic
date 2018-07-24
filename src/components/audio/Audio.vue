@@ -1,10 +1,10 @@
 <template>
   <div class="audio">
     <!-- autoplay loop -->
-      <audio :src="playerUrl" ref="audio" @ended='playEnd' @play="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
+      <audio id="music-audio"  :src="playerUrl" ref="audio" @ended='playEnd' @canplay="startPlay" @error="error" @timeupdate="timeUpdate" autoplay></audio>
 
       <!-- mini Player -->
-      <div class="mini" v-show="miniPlay" @click="toPlayer()">
+      <div class="mini" v-show="miniPlay" @click="toPlayer()" v-if='upsongList.length'>
         <div class="mini-left">
           <img :src="nowSong.picUrl">
           <div class="mini-left-text">
@@ -20,7 +20,7 @@
         </div>
       </div>
       <!-- 列表 -->
-      <ShowList v-show="isShowList" :songlist='uporiginList'></ShowList>
+      <ShowList v-show="isShowList" :songlist='uporiginList' v-if="uporiginList.length"></ShowList>
   </div>
 </template>
 <script>
@@ -60,25 +60,42 @@ export default{
         //刷新后 歌单没有数据
         if(this.songList.length==0){
             let songlist=JSON.parse(localStorage.getItem('songlist'));
-            this.setSonglist(songlist);
+            if(songlist!=null){
+              this.setSonglist(songlist);
+            }else{
+              this.setSonglist([]);
+            }
         }
-        return this.songList;
+        return this.songList;        
     },
     upplayerIndex(){
         if(this.playerIndex==-1){
-            this.setplayerIndex(localStorage.getItem('songindex'));
+          let playerIndex= localStorage.getItem('songindex');
+            if(playerIndex!=null){
+              this.setplayerIndex(playerIndex);              
+            }else{
+              this.setplayerIndex(-1);
+            }
+            return this.playerIndex;
         }
-        return this.playerIndex;
+        return this.playerIndex;        
     },
     uporiginList(){
       //刷新后 歌单没有数据
       if(this.originList.length==0){
           let originlist=JSON.parse(localStorage.getItem('originlist'));
-          this.setOriginList(originlist);
+          if(originlist!=null){
+            this.setOriginList(originlist);
+          }else{
+            this.setOriginList([]);
+          }
       }
       return this.originList;
-        },
+    },
     nowSong(){
+      if(this.upsongList.length==0 || this.upplayerIndex==-1){
+        return {};
+      }
       let song=this.upsongList[this.upplayerIndex];
       let nowSong={};
         nowSong.picUrl=song.al.picUrl;//图片

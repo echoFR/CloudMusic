@@ -16,15 +16,16 @@
               <p class="song-name">{{ item.name }}</p>
           </div>  
       </div>
-      <Loading v-show="haveMore"></Loading>
+      <Loading :haveMore="haveMore" :top='top' style="marginBottom: 4rem"></Loading>
       <div class="over" v-show="!haveMore">
-          <span> 加载结束^8^ ~~~ </span>
+           加载结束，我也是有底线的 ! 
       </div>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
+import {api} from '@/assets/js/config'
 import Loading from '@/base/loading/Loading'
 import height from '@/assets/js/height'
 export default {
@@ -36,12 +37,13 @@ export default {
           songslists:[], 
           id:0,
           showNum: 6,
-          haveMore: true
+          haveMore: true,
+          top:'0rem'
       }
   },
   mounted(){
       this.getSongslist();
-      this.getmore();      
+      this.getmore();    
   },
   methods:{
       // 跳转至List
@@ -54,7 +56,7 @@ export default {
         },
       //   获得歌单
         getSongslist(){
-            axios.get('/api/top/playlist?&order=hot&limit='+this.showNum).then((res)=>{
+            axios.get(`${api}/top/playlist?&order=hot&limit=${this.showNum}`).then((res)=>{
                 if(this.showNum>=108){
                     this.haveMore= false;
                     return;
@@ -68,6 +70,7 @@ export default {
         getmore(){
             //  滚动事件触发
             window.onscroll=()=>{
+                if(this.haveMore==false){return;}//没有更多
                 if(height.getScrollTop() + height.getClientHeight()+1 >= height.getScrollHeight()) {
                     this.showNum+=8;
                     this.getSongslist();               

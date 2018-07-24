@@ -1,6 +1,6 @@
 <template>
   <div class="rank">
-     <Load v-show="isShowLoading"></Load>
+     <Loading :top='top'></Loading>
      <div v-show="isLoaded">
        <!-- 官方榜 -->
       <div class="rank-offcial">
@@ -141,19 +141,16 @@
 </template>
 <script>
 import axios from 'axios'
-import Load from '@/base/loading/Loading'
+import {api} from '@/assets/js/config'
+import Loading from '@/base/loading/Loading'
 import {mapGetters} from 'vuex'
 export default{
   components:{
-    Load
-  },
-  computed:{
-    ...mapGetters([
-      'isShowLoading'
-    ])
+    Loading
   },
   data(){
     return{
+      top: '20rem',
       isLoaded: false,
       speedup:{
         id: null,
@@ -232,7 +229,7 @@ export default{
   },
   methods:{
     getRankList(){
-      axios.get('/api/toplist').then((res)=>{
+      axios.get(`${api}/toplist`).then((res)=>{
         // 官方
         this.getRankShow(this.speedup,res.data.list[0]);
         this.getRankShow(this.newsong,res.data.list[1]);
@@ -259,8 +256,6 @@ export default{
         this.getThreeSong(this.newElectro,res.data.list[9].id);
         this.getThreeSong(this.classical,res.data.list[11].id);
         this.getThreeSong(this.ktv,res.data.list[16].id);
-        
-        
       }).catch((err)=>{
         console.log(err);
         console.log('获取排行榜列表失败');
@@ -285,7 +280,7 @@ export default{
         return filteredSong;
     },
     getThreeSong(obj,id){
-      axios.get('/api/playlist/detail',{
+      axios.get(`${api}/playlist/detail`,{
         params: {
           id: id
         }

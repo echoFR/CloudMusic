@@ -1,6 +1,5 @@
 <template>
     <div class="songslist-con">
-        <Loading v-show="isShowLoading"></Loading>
         <ul class="songslist-con-ul">
             <li v-for="(item,index) in songsdata.tracks" :key="index">  
                 <div class="songslist-con-box"  @click="toPlayer(item,index)">
@@ -18,7 +17,6 @@
     </div>
 </template>
 <script>
-import Loading from '@/base/loading/Loading'
 import {mapMutations,mapGetters} from 'vuex'
 export default{
     props: {
@@ -30,7 +28,6 @@ export default{
     computed:{
         ...mapGetters([
             'originList',
-            'isShowLoading',
             'song'
         ])
     },
@@ -61,9 +58,6 @@ export default{
             // 显示遮罩
             this.showMore();      
         }
-    },
-    components:{
-        Loading
     },
 }
 </script>

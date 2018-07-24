@@ -109,7 +109,7 @@ export default {
   padding: 0 4%;
 }
 .singer-sort-tag span{
-  padding: 0.6rem;
+  padding: 1rem;
   display: inline-block;
   border: 0.1rem #B6B6B6 solid;
   border-radius: 0.5rem;

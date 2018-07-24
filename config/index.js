@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://localhost:3000',//设置调用的接口域名和端口号
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
+      // 'api': {
+      //   target: 'http://123.207.90.19:3000',//设置调用的接口域名和端口号
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^api': ''
+      //   }
+      // }
     },
 
     // Various Dev Server settings
@@ -45,6 +45,7 @@ module.exports = {
   },
 
   build: {
+    port: 3001,
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 

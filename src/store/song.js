@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {localHistory,addHistory,deleteSearch} from '@/assets/js/cache.js'
-
+import {api} from '@/assets/js/config'
 let state={
     // 点击右侧显示更多
     isShowMore: false,
@@ -216,7 +216,7 @@ function findIndex(list, song) {
 }
 const actions={
     getSongComment:({commit,state},songid)=>{
-        axios.get('http://localhost:3000/comment/music',{
+        axios.get(`${api}/comment/music`,{
                 params: {
                     id: songid
                 }
@@ -231,7 +231,7 @@ const actions={
         });
     },
     getSongUrl:({commit,state},songid)=>{
-        axios.get('http://localhost:3000/music/url?id='+songid).then((res)=>{
+        axios.get(`${api}/music/url?id=${songid}`).then((res)=>{
                 // 设置playerUrl
                 commit('setplayerUrl',res.data.data[0].url);
             }).catch((err)=>{
@@ -240,7 +240,7 @@ const actions={
         }); 
     },
     getLyric:({commit,state},songid)=>{
-        axios.get('http://localhost:3000/lyric?id='+songid).then((res)=>{
+        axios.get(`${api}/lyric?id=${songid}`).then((res)=>{
             if(res.data.nolyric==true){
                 commit('changeNoLyric',true);                
                 commit('setNoLyric','纯音乐，请欣赏');

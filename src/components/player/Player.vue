@@ -102,6 +102,7 @@
 import ShowMore from '@/base/list/list-showmore/ShowMore'
 import ShowList from '@/base/showlist/ShowList'
 import axios from 'axios'
+import {api} from '@/assets/js/config'
 import {mapMutations,mapGetters,mapActions} from 'vuex'
 import {shuffle} from '@/assets/js/util.js'
 // 播放模式
@@ -191,7 +192,7 @@ export default{
             if(this.upsongList[this.upplayerIndex].ar[1]){
                 currentSong.singer+=' / '+this.upsongList[this.upplayerIndex].ar[1].name
             }
-            axios.get('http://localhost:3000/comment/music',{
+            axios.get(`${api}/comment/music`,{
                     params: {
                         id: currentSong.id
                     }

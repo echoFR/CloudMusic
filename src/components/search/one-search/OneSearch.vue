@@ -33,13 +33,15 @@
             {{ item.name }}
         </li>
       </ul>
-      <div class="loadbox">
-          <Loading v-show="haveMore"></Loading>
-      </div>
+    <Loading  :top='top' :haveMore='haveMore'></Loading>
+    <div class="over" v-show="!haveMore">
+           加载结束，我也是有底线的 ! 
+    </div>
     </div>
 </template>
 <script>
 import axios from 'axios'
+import {api} from '@/assets/js/config'
 import {mapGetters,mapMutations,mapActions} from 'vuex'
 import {CheckEmptyStr} from '@/assets/js/util.js'
 import Loading from '@/base/loading/Loading'
@@ -51,6 +53,7 @@ export default{
             suggest:{},
             haveMore: true,
             page: 0,
+            top: '0rem'
         }
     },
     components:{
@@ -90,7 +93,7 @@ export default{
             if(CheckEmptyStr(this.keyword)){
                 return;
             }else{
-                axios.get(`/api/search?keywords=${this.keyword}&offset=${this.page}`).then((res)=>{
+                axios.get(`${api}/search?keywords=${this.keyword}&offset=${this.page}`).then((res)=>{
                     this.List=res.data.result.songs;
                     this.page+=30;
                 }).catch((err)=>{
@@ -102,7 +105,7 @@ export default{
             if(CheckEmptyStr(this.keyword)){
                 return;
             }else{
-                axios.get(`/api/search?keywords=${this.keyword}&offset=${this.page}`).then((res)=>{
+                axios.get(`${api}/search?keywords=${this.keyword}&offset=${this.page}`).then((res)=>{
                     if (!res.data.result.songs) {
                         this.haveMore = false;
                         return;
@@ -117,7 +120,7 @@ export default{
             if(CheckEmptyStr(this.keyword)){
                 return;
             }else{
-                 axios.get(`/api/search/suggest?keywords=${this.keyword}&offset=${this.page}`).then((res)=>{
+                 axios.get(`${api}/search/suggest?keywords=${this.keyword}&offset=${this.page}`).then((res)=>{
                     this.suggest =res.data.result;
                 }).catch((err)=>{
                     console.log(err);
@@ -127,7 +130,7 @@ export default{
            
         },
         toPlayer(item){
-            axios.get(`/api/song/detail?ids=${item.id}`).then((res)=>{
+            axios.get(`${api}/song/detail?ids=${item.id}`).then((res)=>{
                 return res.data.songs[0];
             }).then((song)=>{
                 // 插入歌曲
@@ -138,7 +141,7 @@ export default{
             });
         },
         toSongList(item){
-            axios.get(`/api/playlist/detail?id=${item.id}`).then((res)=>{
+            axios.get(`${api}/playlist/detail?id=${item.id}`).then((res)=>{
                 return res.data.playlist;
             }).then((songs)=>{
                 this.$router.push({path: '/songslist/'+songs.id,query:{
@@ -171,7 +174,7 @@ export default{
 .one-search{
     width: 100%;
     margin-top: 5rem;
-    margin-bottom: 6rem;
+    padding-bottom: 10rem; 
 }
 .one-search-singer,.one-search-list,.one-search-s{
     width: 100;

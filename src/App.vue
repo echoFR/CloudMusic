@@ -1,5 +1,5 @@
 <template>
-  <div class="app" ref="appbox">
+  <div class="app" ref="appbox" id="app-box">
     <MyAudio></MyAudio>
     <Header v-show="isShowHeader"></Header>
     <keep-alive exclude="list,player,singers,singer-list">
@@ -14,6 +14,11 @@ import MyAudio from '@/components/audio/Audio'
 import {mapActions,mapGetters, mapMutations} from 'vuex'
 export default {
   name: 'App',
+  data(){
+    return {
+      stop: false
+    }
+  },
   components:{
     Header,
     MyAudio,
@@ -33,6 +38,10 @@ export default {
         this.showMiniPlay();
       }  
     },
+    stop () {
+      let app = document.querySelector('#app-box')
+      app.removeEventListener('touchend', this.firstPlay)
+    }
   },
   methods:{
     ...mapMutations([
@@ -41,6 +50,13 @@ export default {
       'hideMiniPlay',
       'showMiniPlay'
     ]),
+    firstPlay () {
+      let music = document.querySelector('#music-audio')
+      music.play()
+      if (music.src !== '') {
+        this.stop = true
+      }
+    }
   },
   computed:{
     ...mapGetters([
@@ -48,6 +64,8 @@ export default {
     ]), 
   },
   mounted(){
+    let app = document.querySelector('#app-box')
+    app.addEventListener('touchend', this.firstPlay)
     if(this.$route.name=='recommend' || this.$route.name=='songs' || this.$route.name=='rank'){
         this.$store.commit('showHeader');      
     }
@@ -60,7 +78,7 @@ export default {
     else{
       this.showMiniPlay();
     } 
-  }
+  },
 }
 </script>
 <style>

@@ -25,6 +25,7 @@
 import {debounce} from '@/assets/js/util.js'
 import height from '@/assets/js/height.js'
 import axios from 'axios'
+import {api} from '@/assets/js/config'
 import OneSearch from '@/components/search/one-search/OneSearch'
 import SearchList from '@/base/search-list/SearchList'
 import Confirm from '@/base/confirm/Confirm'
@@ -58,10 +59,11 @@ import {mapGetters,mapMutations} from 'vuex'
       ...mapMutations([
         'setSearchHistory',
         'clearHistory',
-        'delectHistory'
+        'delectHistory',
+        'setLoading'
       ]),
       getHotList(){
-        axios.get('/api/search/hot').then((res)=>{
+        axios.get(`${api}/search/hot`).then((res)=>{
           this.HotList= res.data.result.hots;
         }).catch((err)=>{
           console.log(err);
@@ -77,6 +79,7 @@ import {mapGetters,mapMutations} from 'vuex'
       Scroll(){
           window.onscroll=()=>{
                 if(height.getScrollTop() + height.getClientHeight()+1 >= height.getScrollHeight()) {
+                  this.setLoading(true);
                   this.$refs.oneSearch.getMoreList();
                 }
             }

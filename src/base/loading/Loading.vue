@@ -1,15 +1,29 @@
 <template>
-    <div class="loading">
+    <div class="loading" v-show="isShowLoading && haveMore" :style="{marginTop: top}">
         <img src="./loading.gif" align="absmiddle">{{loadText}}
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
     export default{
         props:{
             loadText:{
                 type: String,
                 default: '努力加载中...'
+            },
+            haveMore:{
+                type: Boolean,
+                default: true
+            },
+            top:{
+                type: String,
+                default: '15rem'   
             }
+        },
+        computed:{
+            ...mapGetters([
+                'isShowLoading'
+            ])
         }
     }
 </script>

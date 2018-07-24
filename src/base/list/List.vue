@@ -3,6 +3,9 @@
       <LHeader :songsdata="songs" v-show="isSongList"></LHeader>
       <RHeader :songsdata="songs" v-show="!isSongList"></RHeader>
       <LTag :songsdata="songs"></LTag>
+      <div class="loading" v-show="load" style="marginTop: 10rem">
+        <img src="@/base/loading/loading.gif" align="absmiddle">努力加载中...
+      </div>
       <ListData :songsdata="songs"></ListData>
       <ShowMore v-show="isShowMore"></ShowMore>
   </div>
@@ -14,6 +17,7 @@ import LTag from '@/base/list/list-tag/LTag'
 import ListData from '@/base/list/list-data/ListData'
 import ShowMore from '@/base/list/list-showmore/ShowMore'
 import axios from 'axios'
+import {api} from '@/assets/js/config'
 import {mapGetters,mapActions} from 'vuex'
 export default{
     name: 'list',
@@ -22,7 +26,7 @@ export default{
         RHeader,
         LTag,
         ListData,
-        ShowMore
+        ShowMore,
     },
     data(){
        return{
@@ -43,19 +47,19 @@ export default{
                     description: '',//描述
                     tags: [],//类型
                 },
-            isSongList: false
-            
+            isSongList: false,
+            load: true
        }
     },
     computed:{
         ...mapGetters([
-            'isShowMore'
+            'isShowMore',
         ])
     },
     methods: {
         // 获得歌单详细信息
         getSongsDetail(songsid){
-            axios.get('/api/playlist/detail',{
+            axios.get(`${api}/playlist/detail`,{
                     params: {
                         id: songsid
                     }
@@ -69,14 +73,15 @@ export default{
                     this.songs.subscribedCount=res.data.playlist.subscribedCount;
                     this.songs.description=res.data.playlist.description;  
                     this.songs.tags=res.data.playlist.tags;
-                    this.songs.number=res.data.playlist.trackCount;                   
+                    this.songs.number=res.data.playlist.trackCount; 
+                    this.load=false;
                 }).catch(function(err){
                     console.log(err);
                 });
         },
         // 获取歌单评论
         getSongsComment(songsid){
-            axios.get('/api/comment/playlist',{
+            axios.get(`${api}/comment/playlist`,{
                     params: {
                         id: songsid
                     }
@@ -105,6 +110,18 @@ export default{
 .songslist{
     background-color: #EFEFEF;   
     margin-bottom: 5rem; 
+}
+.loading{
+    width: 100%;
+    background-color: #EFEFEF;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.5rem;
+}
+.loading img{
+    margin-right: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 </style>
 

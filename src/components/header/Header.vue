@@ -1,7 +1,8 @@
 <template>
   <div class="header">
     <div class="header-top">
-      <router-link to="/info" class="more"><img src="@/assets/img/more.png"></router-link>
+        <li class="more"><img src="@/assets/img/more.png"></li>
+      <!-- <router-link to="/info" class="more"><img src="@/assets/img/more.png"></router-link> -->
       <router-link to="/search" class="searchbtn"><img src="@/assets/img/search.png"></router-link>      
       <div class="text">Music Echo</div>
     </div>

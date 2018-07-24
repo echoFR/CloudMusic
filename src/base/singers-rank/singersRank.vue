@@ -18,6 +18,7 @@
 </template>
 <script>
 import axios from 'axios'
+import {api} from '@/assets/js/config'
 import Goback from '@/base/goback/Goback'
 import Loading from '@/base/loading/Loading'
 import {mapMutations,mapGetters} from 'vuex'
@@ -48,7 +49,7 @@ export default{
     },
     mounted() {
         if(this.$route.query.act=='singers-rank'){
-            axios.get('/api/toplist/artist').then((res)=>{
+            axios.get(`${api}/toplist/artist`).then((res)=>{
                 this.singers=res.data.list.artists;
             }).catch((err)=>{
                 console.log(err);
@@ -57,7 +58,7 @@ export default{
         else{
             this.title=this.$route.query.title;
             let cat= this.$route.query.cat;
-            axios.get(`/api/artist/list?cat=${cat}`).then((res)=>{
+            axios.get(`${api}/artist/list?cat=${cat}`).then((res)=>{
                 this.singers=res.data.artists;
             }).catch((err)=>{
                 console.log(err);

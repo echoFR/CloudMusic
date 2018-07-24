@@ -7,12 +7,9 @@ const getters={
     },
 }
 const mutations={
-    showLoading(state){
-        state.isShowLoading=true;
-    },
-    hideLoading(state){
-        state.isShowLoading=false;
-    },
+    setLoading(state,flag){
+        state.isShowLoading=flag;        
+    }
 }
 const actions={
     showLoading:({commit})=>{
