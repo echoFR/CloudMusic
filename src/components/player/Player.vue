@@ -152,7 +152,6 @@ export default{
             'noLyric'
         ]),
         upsongList(){
-            //刷新后 歌单没有数据
             if(this.songList.length==0){
                 let songlist=JSON.parse(localStorage.getItem('songlist'));
                 this.setSonglist(songlist);
@@ -160,7 +159,6 @@ export default{
             return this.songList;
         },
         uporiginList(){
-            //刷新后 歌单没有数据
             if(this.originList.length==0){
                 let originlist=JSON.parse(localStorage.getItem('originlist'));
                 this.setOriginList(originlist);
