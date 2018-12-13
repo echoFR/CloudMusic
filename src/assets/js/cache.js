@@ -1,4 +1,4 @@
-//本地  搜索记录
+// 历史 搜索记录
 export function localHistory(){
     let strKey='history';
     let searches=[];

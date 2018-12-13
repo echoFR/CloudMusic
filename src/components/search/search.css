@@ -1,37 +1,37 @@
 .search{
     background-color: #EFEFEF;
-    font-size: 1.5rem;
+    font-size: 0.15rem;
     width: 100%;
 }
 /* 热门搜索 */
 .hot-search{
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 0.5rem;
 }
 .hot-search-title,.history-title{
     width: 98%;
-    font-size: 1.3rem;
+    font-size: 0.13rem;
     color: rgb(133, 132, 132);
-    padding: 1rem 1% 0 1%;
+    padding: 0.1rem 1% 0 1%;
 }
 .hot-search-tip{
     width: 98%;
     padding: 0 1%;
     overflow: hidden;
-    font-size: 1.4rem;
+    font-size: 0.14rem;
 }
 .hot-tip{
-    padding: 0.5rem;
-    border: 0.05rem solid rgb(119, 114, 114);
-    border-radius: 1.5rem;
+    padding: 0.05rem;
+    border: 0.005rem solid rgb(119, 114, 114);
+    border-radius: 0.15rem;
     float: left;
-    margin: 1rem 1.5rem 0 0;
+    margin: 0.1rem 0.15rem 0 0;
 }
 .history{
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 0.2rem;
 }
 .history-title img{
-    width: 2rem;
-    height: 2rem;
+    width: 0.2rem;
+    height: 0.2rem;
 }

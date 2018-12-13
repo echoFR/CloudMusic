@@ -218,12 +218,12 @@ export default{
   bottom: 0;
   left: 0;
   background-color: white;
-  height: 5rem;
+  height: 0.5rem;
   z-index: 100;
   color: black;
-  padding: 0.5rem;
+  padding: 0.05rem;
   overflow: hidden;
-  font-size: 1.4rem;
+  font-size: 0.14rem;
 }
 .mini-left{
   float: left;
@@ -237,15 +237,15 @@ export default{
 }
 .mini-left-text{
   float: left;
-  height: 5rem;
+  height: 0.5rem;
   width: 76%;
   overflow: hidden;
 }
 .mini-left-text span{
   width: 100%;
   display: block;
-  height: 2.5rem;
-  line-height: 2.5rem;
+  height: 0.25rem;
+  line-height: 0.25rem;
   text-overflow:ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -255,12 +255,12 @@ export default{
   overflow: hidden;
 }
 .text-singer{
-  font-size: 1.2rem;
+  font-size: 0.12rem;
 }
 .mini-right img{
   width: 35%;
   height: auto;
-  margin: 0.9rem 10% 0.9rem 0;
+  margin: 0.09rem 10% 0.9rem 0;
   float: left;
 }
 .mini-right{

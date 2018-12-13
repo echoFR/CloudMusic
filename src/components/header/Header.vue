@@ -21,7 +21,7 @@
 <style scoped>
 .header{
     width: 100%;
-    font-size: 1.4rem;
+    font-size: 0.14rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -30,19 +30,19 @@
 .header-top{
     width: 100%;
     position: relative;
-    padding: 1rem 0;
-    height: 3rem;
-    line-height: 3rem;
+    padding: 0.1rem 0;
+    height: 0.3rem;
+    line-height: 0.3rem;
     text-align: center;
     color: aliceblue;
     background-color: #d23023;
-    font-size: 1.9rem;
+    font-size: 0.19rem;
 }
 .more,.searchbtn{
-    width: 4rem;
-    height: 4rem;
+    width: 0.4rem;
+    height: 0.4rem;
     position: absolute;
-    top: 1rem;
+    top: 0.1rem;
 }
 .more{
     left: 0;    
@@ -51,8 +51,8 @@
     right: 0;
 } 
 .more img,.searchbtn img{
-    width: 3rem;
-    height: 3rem;
+    width: 0.3rem;
+    height: 0.3rem;
 }
 
 
@@ -62,8 +62,8 @@
 }
 .header-nav{
     width: 100%;
-    height: 4rem;
-    line-height: 4rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
     overflow: hidden;
 }
 .header-nav li{

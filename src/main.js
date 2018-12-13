@@ -10,10 +10,6 @@ import store from '@/store/index'
 import animate from 'animate.css'
 Vue.use(animate);
 
-//处理移动端click事件300毫秒延迟
-// import fastclick from 'fastclick'
-// fastclick.attach(document.body);
-
 Vue.config.productionTip = false
 // Swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
@@ -25,8 +21,6 @@ Vue.use(VueLazyLoad,{
   error: require('./assets/img/music.jpg'),
   loading: require('./assets/img/music1.jpg'),
 });
-
-
 // axios拦截器
 
 // 添加请求拦截器

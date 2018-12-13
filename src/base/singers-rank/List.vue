@@ -61,7 +61,7 @@ import { mapGetters } from 'vuex';
 .singer-img{
     width: 100%;
     height: auto;
-    margin-top: 4rem;
+    margin-top: .4rem;
 }
 </style>
 

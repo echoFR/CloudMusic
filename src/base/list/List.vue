@@ -109,19 +109,19 @@ export default{
 <style>
 .songslist{
     background-color: #EFEFEF;   
-    margin-bottom: 5rem; 
+    margin-bottom: .5rem; 
 }
 .loading{
     width: 100%;
     background-color: #EFEFEF;
     text-align: center;
-    padding: 1rem 0;
-    font-size: 1.5rem;
+    padding: .1rem 0;
+    font-size: .15rem;
 }
 .loading img{
-    margin-right: 1.5rem;
-    width: 3.5rem;
-    height: 3.5rem;
+    margin-right: .15rem;
+    width: .35rem;
+    height: .35rem;
 }
 </style>
 

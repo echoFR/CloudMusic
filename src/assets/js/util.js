@@ -22,15 +22,52 @@ export function debounce (func, delay) {
         }, delay)
     }
 }
-export function throttle(fn,delay){
-    let startTime = 0;
-    return (...args) => {
-        let timeNow = +new Date();
-        if(timeNow - startTime >= delay){
-            fn(...args);
-            startTime = timeNow;
+
+// export function throttle(func, wait) {
+//     var timeout;
+//     var previous = 0;
+
+//     return function() {
+//         context = this;
+//         args = arguments;
+//         if (!timeout) {
+//             timeout = setTimeout(function(){
+//                 timeout = null;
+//                 func.apply(context, args)
+//             }, wait)
+//         }
+
+//     }
+// }
+export function throttle(func, wait) {
+    var timeout, context, args, result;
+    var previous = 0;
+
+    var later = function() {
+        previous = +new Date();
+        timeout = null;
+        func.apply(context, args)
+    };
+
+    var throttled = function() {
+        var now = +new Date();
+        //下次触发 func 剩余的时间
+        var remaining = wait - (now - previous);
+        context = this;
+        args = arguments;
+         // 如果没有剩余的时间了或者你改了系统时间
+        if (remaining <= 0 || remaining > wait) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            previous = now;
+            func.apply(context, args);
+        } else if (!timeout) {
+            timeout = setTimeout(later, remaining);
         }
-    }
+    };
+    return throttled;
 }
 
 export function CheckEmptyStr(string){
@@ -39,4 +76,17 @@ export function CheckEmptyStr(string){
         return true;
     }
     return false;
+}
+
+export function changeFont(){
+    const desW= 375,
+    winW= document.documentElement.clientWidth,
+    ratio= winW / desW;
+    const mainW = document.getElementById('app-box');
+    if(winW > desW){
+      mainW.style.width= desW+ 'px';
+      mainW.style.margin= '0 auto';
+      return
+    }
+    document.documentElement.style.fontSize = ratio * 100 +'px';
 }

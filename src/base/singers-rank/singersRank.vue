@@ -5,11 +5,11 @@
             <Loading v-show="isShowLoading"></Loading>
             <ul class="rank-list-ul">
                 <li v-for="(item,index) in singers" :key="index" @click="goSinger(item)">
-                    <span class="rank-num">{{ index+1 }}</span>
+                    <div class="rank-num">{{ index+1 }}</div>
                     <div class="rank-li-img"><img v-lazy='item.picUrl'></div>
                     <div class="rank-li-text">
                         <span>{{ item.name }}</span>
-                        <span>{{ item.score }}</span>
+                        <span>{{ item.musicSize}}首</span>
                     </div>
                 </li>
             </ul>
@@ -41,6 +41,7 @@ export default{
     },
     methods:{
         goSinger(item){
+            console.log(item)
             this.$router.push({path: '/singers-rank/list/'+item.id,query:{
                 picUrl: item.picUrl,
                 name: item.name
@@ -50,7 +51,7 @@ export default{
     mounted() {
         if(this.$route.query.act=='singers-rank'){
             axios.get(`${api}/toplist/artist`).then((res)=>{
-                this.singers=res.data.list.artists;
+                console.log(this.singers)
             }).catch((err)=>{
                 console.log(err);
             });
@@ -71,7 +72,7 @@ export default{
 @import 'singers-rank.css';
 .singers-rank{
     width: 100%;
-    padding: 6rem 0 5rem 0;
+    padding: 0.6rem 0 0.5rem 0;
 }
 </style>
 

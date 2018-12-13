@@ -63,15 +63,15 @@ export default {
 </script>
 <style>
 .recommend{
-  margin-top: 9rem;
+  margin-top: 0.9rem;
   background-color: #EFEFEF;
-  padding-bottom: 5rem;  
+  padding-bottom: 0.5rem;  
 }
 
 .tag{
-    padding: 1rem 0;
+    padding: 0.1rem 0;
     width: 100%;
-    border-bottom: 0.05rem solid #eee;
+    border-bottom: 0.005rem solid #eee;
 }
 .tag-nav{
     width: 100%;
@@ -83,37 +83,37 @@ export default {
     text-align: center;
 }
 .tag-nav li img{
-    width: 3rem;
-    height: 3rem;
+    width: 0.3rem;
+    height: 0.3rem;
 }
 .tag-nav li span{
     display: block;
     width: 100%;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 0.11rem;
 }
 
 .singer-sort{
   width: 100%;
-  border-top: 0.1rem #B6B6B6 solid;
+  border-top: 0.01rem #B6B6B6 solid;
   
 }
 .singer-sort-title{
-  padding: 1rem;
-  font-size: 1.5rem;
+  padding: 0.1rem;
+  font-size: 0.15rem;
   color: red;
 }
 .singer-sort-tag{
-  margin-top: 0.5rem;
+  margin-top: 0.05rem;
   width: 92%;
   padding: 0 4%;
 }
 .singer-sort-tag span{
-  padding: 1rem;
+  padding: 0.1rem;
   display: inline-block;
-  border: 0.1rem #B6B6B6 solid;
-  border-radius: 0.5rem;
-  margin: 0 1rem 1.5rem 0;
+  border: 0.01rem #B6B6B6 solid;
+  border-radius: 0.05rem;
+  margin: 0 0.1rem 0.15rem 0;
 }
 </style>
 

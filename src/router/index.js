@@ -99,5 +99,6 @@ export default new Router({
     }
   ],
   mode:'history',
+  base: '/music/', //为了部署到服务器的music目录
   scrollBehavior: () => ({ y: 0 }), // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
 })

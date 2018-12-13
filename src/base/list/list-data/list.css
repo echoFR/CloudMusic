@@ -2,12 +2,12 @@
     width: 100%;
     text-align: center;
     background-color: white;
-    margin-top: 10rem;
+    margin-top: .1rem;
 }
 .loading-list img{
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-right: 1.5rem;
+    width: 0.25rem;
+    height: 0.25rem;
+    margin-right: 0.15rem;
 }
 .songslist-con{
     background-color: whitesmoke;
@@ -17,10 +17,10 @@
     width: 100%;
 }
 .songslist-con-ul li{
-    padding: 1rem 1%;
+    padding: .1rem 1%;
     width: 98%;
     position: relative;
-    border-bottom: 0.1rem solid #eee;
+    border-bottom: 0.01rem solid #eee;
 }
 .songslist-con-box{
     margin-left: 10%;
@@ -28,19 +28,19 @@
 }
 .songslist-con-box span{
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.05rem;
     width: 94%; 
 }
 .songslist-title{
-    font-size: 1.5rem;
+    font-size: .15rem;
 }
 .songslist-num,.songslist-more{
     position: absolute;
 }
 .songslist-num{
-    font-size: 2rem;
+    font-size: .2rem;
     height: 100%;
-    line-height: 6.7rem;
+    line-height: 0.67rem;
     text-align: center;
     width: 10%;
     top: 0;
@@ -49,10 +49,10 @@
 }
 .songslist-more{
     top: 50%;
-    margin-top: -1.3rem;
+    margin-top: -0.13rem;
     right: 2%;
 }
 .songslist-more img{
-    width: 2.5rem;
-    height: 2.5rem;
+    width: .25rem;
+    height: .25rem;
 }

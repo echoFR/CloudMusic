@@ -271,6 +271,7 @@ export default{
     },
     filterSong(song){
       let filteredSong={};
+      console.log(song)
         filteredSong.name=song.name;//歌名 
         filteredSong.id=song.id;   //id
         filteredSong.singer=song.ar[0].name;                 
@@ -313,9 +314,9 @@ export default{
 @import './rank.css';
 .rank{
   width: 100%;
-  margin-top: 9rem;
-  margin-bottom: 5rem;
+  margin-top: 0.9rem;
+  margin-bottom: 0.5rem;
   background-color: #EFEFEF;
-  padding-bottom: 1.5rem;  
+  padding-bottom: 0.15rem;  
 }
 </style>

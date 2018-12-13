@@ -55,11 +55,11 @@ export default{
 }
 .swiper-container {
     width: 100%;
-    height: 15rem;
+    height: 1.5rem;
 }  
 .swiper-slide{
     width: 100%;
-    height: 15rem;
+    height: 1.5rem;
     text-align: center;
 }
 .swiper-slide img{

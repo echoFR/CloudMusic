@@ -17,25 +17,25 @@
 .play-all-header{
     width: 100%;
     overflow: hidden;
-    font-size: 1.4rem;
-    height: 4rem;
-    line-height: 4rem;
+    font-size: .14rem;
+    height: .4rem;
+    line-height: .4rem;
 }
 .play-all-left{
     float: left;
     width: 70%;
-    border-bottom: 0.1rem solid #eee;
+    border-bottom: .01rem solid #eee;
 }
 .play-all-right{
     width: 30%;
     float: right;
     background-color: #F9520F;
-    height: 3.8rem;
+    height: .38rem;
     text-align: center;
 }
 .play-all-left img{
-    width: 2rem;
-    height: 2rem;
+    width: .2rem;
+    height: .2rem;
 }
 </style>
 

@@ -53,32 +53,32 @@ export default {
     top: 30%;
     left: 50%;
     margin-left: -40%;
-    border-radius: 0.8rem;
+    border-radius: 0.08rem;
     text-align: center;
 }
 .confirm-title{
     font-weight: bold;
     padding: 1%;
-    font-size: 1.8rem
+    font-size: 0.18rem
 }
 .confirm-text{
     width: 100%;
-    height: 10rem;
-    line-height: 10rem;
+    height: 1rem;
+    line-height: 1rem;
 }
 .confirm-act{
     width: 100%;
-    border-top: 0.1rem solid #B6B6B6;
+    border-top: 0.01rem solid #B6B6B6;
 }
 .confirm-act span{
     display: inline-block;
     text-align: center;
     width: 48%;
-    height: 3rem;
-    line-height: 3rem;
+    height: .3rem;
+    line-height: .3rem;
 }
 .confirm-no{
-    border-right: 0.1rem solid #B6B6B6;
+    border-right: 0.01rem solid #B6B6B6;
 }
 .confirm-yes{
     color: #60D048;

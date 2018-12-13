@@ -173,18 +173,18 @@ export default{
 /* 一级搜索 */
 .one-search{
     width: 100%;
-    margin-top: 5rem;
-    padding-bottom: 10rem; 
+    margin-top: 0.5rem;
+    padding-bottom: 1rem; 
 }
 .one-search-singer,.one-search-list,.one-search-s{
     width: 100;
 }
 .one-search-s li,.one-search-singer li{
     overflow: hidden;
-    height: 6rem;
-    border-bottom: 0.01rem #eee solid;
-    padding: 1rem 0;
-    margin-bottom: 1rem;
+    height: 0.6rem;
+    border-bottom: 0.001rem #eee solid;
+    padding: 0.1rem 0;
+    margin-bottom: 0.1rem;
 }
 .one-search-sleft,.one-search-singer-left{
     width: 20%;
@@ -202,22 +202,22 @@ export default{
 .one-search-sright span{
     width: 100%;
     display: block;
-    height: 3rem;
-    line-height: 3rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 .one-search-singer-right{
     display: block;
-    height: 6rem;
-    line-height: 6rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
 }
 .one-search-list li{
     width: 100%;
-    height: 4rem;
-    line-height: 4rem;
-    border-bottom: 0.01rem #DADADA solid;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border-bottom: 0.001rem #DADADA solid;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -226,15 +226,15 @@ export default{
     padding-left: 3%;
 }
 .one-search-list li img{
-    width: 2rem;
-    height: 2rem;
+    width: 0.2rem;
+    height: 0.2rem;
 }
 .title{
     color: #d23023;
     margin-left: 3%;
-    padding: 1rem 0;
-    margin-bottom: 5rem;
-    font-size: 1.7rem;
+    padding: 0.1rem 0;
+    margin-bottom: 0.5rem;
+    font-size: 0.17rem;
 }
 </style>
 

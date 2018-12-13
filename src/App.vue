@@ -12,6 +12,7 @@
 import Header from '@/components/header/Header'
 import MyAudio from '@/components/audio/Audio'
 import {mapActions,mapGetters, mapMutations} from 'vuex'
+import {changeFont} from '../src/assets/js/util.js'
 export default {
   name: 'App',
   data(){
@@ -78,6 +79,7 @@ export default {
     else{
       this.showMiniPlay();
     } 
+    changeFont()
   },
 }
 </script>
@@ -85,5 +87,6 @@ export default {
 .app{
     vertical-align: baseline;
     background-color: #EFEFEF;
+    font-size: 0.01rem;
 }
 </style>

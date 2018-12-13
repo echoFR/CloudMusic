@@ -34,32 +34,32 @@
 <style>
 .go-back{
     width: 100%;
-    font-size: 1.7rem;
+    font-size: .17rem;
     position: fixed;
     left: 0;
     top: 0;
     z-index: 200;
 }
 .go-back img{
-    width: 2.6rem;
-    height: 2.6rem;
+    width: .26rem;
+    height: .26rem;
 }
 .go-back-left{
     display: inline-block;
-    margin-left: 1rem;
+    margin-left: .1rem;
 }
 .go-back-title{
-    height: 4rem;
-    line-height: 4rem;
+    height: .4rem;
+    line-height: .4rem;
     display: inline-block;
 }
 .go-back-right{
     position: absolute;
     right: 0;
-    top: 0.5rem;
+    top: 0.05rem;
 }
 .go-back-right img{
-    margin-right: 1.5rem;
+    margin-right: 0.15rem;
 }
 
 </style>

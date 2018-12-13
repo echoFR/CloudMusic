@@ -42,13 +42,13 @@ import GoBack from '@/base/list/list-header/GoBack'
 .songslist-header-top{
     width: 100%;
     overflow: hidden;
-    margin-bottom: 0.5rem;
-    margin-top: 6rem;
+    margin-bottom: 0.05rem;
+    margin-top: .6rem;
 }
 .songslist-header-left{
     float: left;
     position: relative;
-    margin: 0 1rem 0 1rem;
+    margin: 0 .1rem 0 .1rem;
 }
 .songslist-hear{
     position: absolute;
@@ -56,12 +56,12 @@ import GoBack from '@/base/list/list-header/GoBack'
     top: 0rem;
 }
 .songslist-header-left span img{
-    width: 1.5rem;
-    height: 1.5rem;
+    width: .15rem;
+    height: .15rem;
 }
 .songslist-header-left img{
-    width: 11rem;
-    height: 11rem;
+    width: 1.1rem;
+    height: 1.1rem;
 }
 .songslist-more{
     position: absolute;
@@ -74,18 +74,18 @@ import GoBack from '@/base/list/list-header/GoBack'
     width: 50%;
 }
 .right-title{
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
+    font-size: .14rem;
+    margin-bottom: .2rem;
 }
 .right-text{
     width: 100%;
-    margin-left: 1rem;
+    margin-left: .1rem;
 }
 .right-auto img{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1.5rem;
-    margin-right: 0.5rem;
+    width: .3rem;
+    height: .3rem;
+    border-radius: .15rem;
+    margin-right: 0.05rem;
 }
 </style>
 

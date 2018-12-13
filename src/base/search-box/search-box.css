@@ -1,7 +1,7 @@
 .search-box{
     background-color: #d23023;
-    height: 3rem;
-    padding: 1rem 0;
+    height: .3rem;
+    padding: .1rem 0;
     position: fixed;
     width: 100%;
     left: 0;
@@ -16,25 +16,25 @@
     float: left;
 }
 .goback{
-    width: 2.8rem;
-    height: 2.8rem;
-    margin-left: 0.5rem;
+    width: .28rem;
+    height: .28rem;
+    margin-left: 0.05rem;
 }
 input.search-input{
     background-color: #d23023;
     outline: none;
     border: none;
-    border-bottom: 0.05rem #eee solid;
-    height: 3rem;
-    font-size: 1.8rem;
+    border-bottom: 0.005rem #eee solid;
+    height: .3rem;
+    font-size: .18rem;
     color: #eee;
     width: 94%;
     margin-left: 2%;
 }
 .close{
-    width: 1.8rem;
-    height: 1.8rem;
+    width: .18rem;
+    height: .18rem;
     position: absolute;
-    top: 1.5rem;
+    top: .15rem;
     right: 4%;
 }

@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import {debounce} from '@/assets/js/util.js'
 import height from '@/assets/js/height.js'
 import axios from 'axios'
 import {api} from '@/assets/js/config'

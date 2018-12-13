@@ -1,7 +1,7 @@
 <template>
     <div class="goback-box" :style="{backgroundColor: '#d23023'}">
-            <img src="@/assets/img/goback.png" @click="goback" class="goback">
-            <span class="goback-title">{{ title }}</span>
+        <img src="@/assets/img/goback.png" @click="goback" class="goback">
+        <span class="goback-title">{{ title }}</span>
     </div>
 </template>
 <script>
@@ -21,24 +21,24 @@
 </script>
 <style>
 .goback-box{
-    width: 100%;
-    padding: 1rem 0;
+    width: 98%;
+    padding: .1rem 1%;
     position: fixed;
     left: 0;
     top: 0;
     z-index: 100;
 }
 .goback{
-    width: 2.6rem;
-    height: 2.6rem;
+    width: .26rem;
+    height: .26rem;
 }
 .goback-title{
-    margin-left: 1rem;
+    margin-left: .0.5rem;
     color: white;
-    font-size: 1.6rem;
+    font-size: 16px;
     position: relative;
     left: 0;
-    top: -0.6rem;
+    top: -0.06rem;
 }
 </style>
 
